@@ -22,7 +22,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 'roles' => \App\Models\Role::count(),
                 'permissions' => \App\Models\Permission::count(),
                 'blogs' => 0,
-                'blogCategories' => 0,
+                'blogCategories' => \App\Models\BlogCategory::count(),
             ],
         ]);
     })->name('dashboard');

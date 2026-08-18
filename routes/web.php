@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminSiteSettingController;
+use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,12 +34,25 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ]);
     })->middleware('can:view-blogs')->name('blogs.index');
 
-    Route::get('/blog-categories', function () {
-        return view('admin.index', [
-            'title' => 'Blog Categories',
-            'description' => 'Manage your blog categories from here.',
-        ]);
-    })->middleware('can:view-blog-categories')->name('blog-categories.index');
+    // Route::get('/blog-categories', function () {
+    //     return view('admin.index', [
+    //         'title' => 'Blog Categories',
+    //         'description' => 'Manage your blog categories from here.',
+    //     ]);
+    // })->middleware('can:view-blog-categories')->name('blog-categories.index');
+
+    Route::get('/blog-categories',[BlogCategoryController::class,'index'])
+    ->middleware('can:view-blog-categories')->name('blog-categories.index');
+    Route::get('/blog-categories/create',[BlogCategoryController::class,'create'])
+    ->middleware('can:create-blog-categories')->name('blog-categories.create');
+    Route::post('/blog-categories',[BlogCategoryController::class,'store'])
+    ->middleware('can:create-blog-categories')->name('blog-categories.store');
+    Route::get('/blog-categories/{blogCategory}/edit', [BlogCategoryController::class, 'edit'])
+        ->middleware('can:edit-blog-categories')->name('blog-categories.edit');
+    Route::put('/blog-categories/{blogCategory}', [BlogCategoryController::class, 'update'])
+        ->middleware('can:edit-blog-categories')->name('blog-categories.update');
+    Route::delete('/blog-categories/{blogCategory}', [BlogCategoryController::class, 'destroy'])
+        ->middleware('can:delete-blog-categories')->name('blog-categories.destroy');
 
     Route::get('/users', [UserController::class, 'index'])
         ->middleware('can:view-users')->name('users.index');

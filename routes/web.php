@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminSiteSettingController;
 use App\Http\Controllers\Admin\BlogCategoryController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,18 +22,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 'users' => \App\Models\User::count(),
                 'roles' => \App\Models\Role::count(),
                 'permissions' => \App\Models\Permission::count(),
-                'blogs' => 0,
+                'blogs' => \App\Models\Blog::count(),
                 'blogCategories' => \App\Models\BlogCategory::count(),
             ],
         ]);
     })->name('dashboard');
 
-    Route::get('/blogs', function () {
-        return view('admin.index', [
-            'title' => 'Blog Posts',
-            'description' => 'Manage your blog posts from here.',
-        ]);
-    })->middleware('can:view-blogs')->name('blogs.index');
+    // Route::get('/blogs', function () {
+    //     return view('admin.index', [
+    //         'title' => 'Blog Posts',
+    //         'description' => 'Manage your blog posts from here.',
+    //     ]);
+    // })->middleware('can:view-blogs')->name('blogs.index');
 
     // Route::get('/blog-categories', function () {
     //     return view('admin.index', [
@@ -40,6 +41,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //         'description' => 'Manage your blog categories from here.',
     //     ]);
     // })->middleware('can:view-blog-categories')->name('blog-categories.index');
+
+    Route::get('/blogs',[BlogController::class,'index'])->name('blogs.index');
+    Route::get('/blogs/create',[BlogController::class,'create'])->name('blogs.create');
+    Route::post('/blogs',[BlogController::class,'store'])->name('blogs.store');
+    Route::get('/blogs/{blog}/edit', [BlogController::class, 'edit'])->name('blogs.edit');
+    Route::put('/blogs/{blog}', [BlogController::class, 'update'])->name('blogs.update');
+    Route::delete('/blogs/{blog}', [BlogController::class, 'destroy'])->name('blogs.destroy');
 
     Route::get('/blog-categories',[BlogCategoryController::class,'index'])
     ->middleware('can:view-blog-categories')->name('blog-categories.index');

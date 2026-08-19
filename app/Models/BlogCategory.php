@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use App\Support\HasHashIdRouteBinding;
-
+use App\Models\Blog;
 
 class BlogCategory extends Model
 {
@@ -51,5 +51,10 @@ class BlogCategory extends Model
         }
 
         return $slug;
+    }
+
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class);
     }
 }

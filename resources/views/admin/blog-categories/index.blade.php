@@ -227,7 +227,6 @@
                                     </svg>
 
                                     {{ __('New Category') }}
-
                                 </a>
 
                             @endcan

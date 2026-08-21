@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->timestamps();
             //index
             $table->index('name', 'idx_name');;
+            $table->index('slug', 'idx_slug');;
         });
     }
 

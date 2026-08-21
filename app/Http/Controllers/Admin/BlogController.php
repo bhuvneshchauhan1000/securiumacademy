@@ -43,7 +43,6 @@ class BlogController extends Controller
         return view('admin.blogs.create', compact('categories'));
     }
 
-
     public function store(Request $request)
     {
         $this->authorize('create', Blog::class);

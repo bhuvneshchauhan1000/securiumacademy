@@ -25,7 +25,7 @@ class UserController extends Controller
         })
         ->orderBy('name')
         ->latest()
-        ->paginate(10)
+        ->paginate(15)
         ->withQueryString();
 
         return view('admin.users.index', compact('users'));

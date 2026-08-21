@@ -14,7 +14,11 @@ use App\Events\BlogCreated;
 use App\Listeners\SendBlogCreatedNotification;
 use App\Events\BlogUpdated;
 use App\Listeners\SendBlogUpdatedNotification;
-
+use App\Models\University;
+use App\Observers\UniversityObserver;
+use App\Policies\UniversityPolicy;
+use App\Repositories\Contracts\UniversityRepositoryInterface;
+use App\Repositories\UniversityRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -47,7 +51,11 @@ class AppServiceProvider extends ServiceProvider
             BlogRepository::class
         );
 
+        $this->app->bind(UniversityRepositoryInterface::class, UniversityRepository::class);
+
         Gate::policy(Blog::class, BlogPolicy::class);
+        Gate::policy(University::class, UniversityPolicy::class);
         Blog::observe(BlogObserver::class);
+        University::observe(UniversityObserver::class);
     }
 }

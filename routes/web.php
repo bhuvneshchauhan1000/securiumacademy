@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AdminSiteSettingController;
 use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\UniversityController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 'permissions' => \App\Models\Permission::count(),
                 'blogs' => \App\Models\Blog::count(),
                 'blogCategories' => \App\Models\BlogCategory::count(),
+                'universities' => \App\Models\University::count(),
             ],
         ]);
     })->name('dashboard');
@@ -41,6 +43,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //         'description' => 'Manage your blog categories from here.',
     //     ]);
     // })->middleware('can:view-blog-categories')->name('blog-categories.index');
+    // Route::get('/universities', function () {
+    //     return view('admin.index', [
+    //         'title' => 'Univeristies',
+    //         'description' => 'Manage  university from here.',
+    //     ]);
+    // })->middleware('can:view-universities')->name('universities.index');
+
+    Route::get('/universities',[UniversityController::class,'index'])->name('universities.index');
+    Route::get('/universities/create',[UniversityController::class,'create'])->name('universities.create');
+    Route::post('/universities',[UniversityController::class,'store'])->name('universities.store');
+    Route::get('/universities/{university}/edit', [UniversityController::class, 'edit'])->name('universities.edit');
+    Route::put('/universities/{university}', [UniversityController::class, 'update'])->name('universities.update');
+    Route::delete('/universities/{university}', [UniversityController::class, 'destroy'])->name('universities.destroy');
 
     Route::get('/blogs',[BlogController::class,'index'])->name('blogs.index');
     Route::get('/blogs/create',[BlogController::class,'create'])->name('blogs.create');

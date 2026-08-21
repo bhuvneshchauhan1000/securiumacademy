@@ -17,7 +17,7 @@ class BlogCategoryController extends Controller
                 $query->where('name', 'like', "%{$search}%");
             })
             ->latest('created_at')
-            ->paginate(10)
+            ->paginate(15)
             ->withQueryString();
 
         return view('admin.blog-categories.index', compact('categories'));

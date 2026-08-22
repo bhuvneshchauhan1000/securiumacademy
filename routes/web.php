@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminSiteSettingController;
 use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\UniversityController;
+use App\Http\Controllers\Admin\AcademyController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,29 +27,35 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 'blogs' => \App\Models\Blog::count(),
                 'blogCategories' => \App\Models\BlogCategory::count(),
                 'universities' => \App\Models\University::count(),
+                'academies' => \App\Models\Academy::count(),
             ],
         ]);
     })->name('dashboard');
 
-    // Route::get('/blogs', function () {
+    // Route::get('/academies', function () {
     //     return view('admin.index', [
-    //         'title' => 'Blog Posts',
-    //         'description' => 'Manage your blog posts from here.',
+    //         'title' => 'Academy',
+    //         'description' => 'Manage Academy from here.',
     //     ]);
-    // })->middleware('can:view-blogs')->name('blogs.index');
+    // })->middleware('can:view-academies')->name('academies.index');
 
-    // Route::get('/blog-categories', function () {
-    //     return view('admin.index', [
-    //         'title' => 'Blog Categories',
-    //         'description' => 'Manage your blog categories from here.',
-    //     ]);
-    // })->middleware('can:view-blog-categories')->name('blog-categories.index');
-    // Route::get('/universities', function () {
-    //     return view('admin.index', [
-    //         'title' => 'Univeristies',
-    //         'description' => 'Manage  university from here.',
-    //     ]);
-    // })->middleware('can:view-universities')->name('universities.index');
+    Route::controller(AcademyController::class)->prefix('academies')->name('academies.')->group(function () {
+
+        Route::get('/', 'index')->name('index');
+
+        Route::get('/create', 'create')->name('create');
+
+        Route::post('/', 'store')->name('store');
+
+        Route::get('/{academy:slug}', 'show')->name('show');
+
+        Route::get('/{academy}/edit', 'edit')->name('edit');
+
+        Route::put('/{academy}', 'update')->name('update');
+
+        Route::delete('/{academy}', 'destroy')->name('destroy');
+    });
+
 
     Route::get('/universities',[UniversityController::class,'index'])->name('universities.index');
     Route::get('/universities/create',[UniversityController::class,'create'])->name('universities.create');

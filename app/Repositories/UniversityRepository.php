@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Models\University;
 use App\Repositories\Contracts\UniversityRepositoryInterface;
-use GuzzleHttp\Psr7\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 class UniversityRepository implements UniversityRepositoryInterface

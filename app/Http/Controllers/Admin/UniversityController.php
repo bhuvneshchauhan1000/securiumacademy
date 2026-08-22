@@ -67,7 +67,7 @@ class UniversityController extends Controller
             "logo" => ["nullable", "image", "mimes:jpeg,jpg,png,webp", 'max:20480'],
         ]);
 
-        $this->universityService->create($validated);
+        $this->universityService->create($validated,$request->hasFile('logo') ? $request->file('logo') : null);
         return redirect()->route('universities.index')->with('success', 'University Created Successfully');
     }
 

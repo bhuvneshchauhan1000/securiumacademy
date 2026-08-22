@@ -32,12 +32,26 @@
             </x-sidebar-link>
         @endcan
 
-        @canany(['view-universities'])
+        @canany(['view-universities', 'view-academies'])
             <x-sidebar-section label="{{ __('University Management') }}" />
         @endcanany
 
         @can('view-universities')
             <x-sidebar-link :href="route('universities.index')" :active="request()->routeIs('universities.*')">
+
+                <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 21h18M5 21V9l7-4 7 4v12M9 21v-6h6v6M7 12h.01M12 12h.01M17 12h.01">
+                    </path>
+                </svg>
+
+                {{ __('University') }}
+            </x-sidebar-link>
+        @endcan
+        @can('view-academies')
+            <x-sidebar-link :href="route('academies.index')" :active="request()->routeIs('academies.*')">
+
                 <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22 10l-10-5L2 10l10 5 10-5z">
@@ -46,10 +60,10 @@
                         d="M6 12v4c0 1.5 3.5 3 6 3s6-1.5 6-3v-4"></path>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22 10v6"></path>
                 </svg>
-
-                {{ __('University') }}
+                {{ __('Academy') }}
             </x-sidebar-link>
         @endcan
+
 
         @canany(['view-blogs', 'view-blog-categories'])
             <x-sidebar-section label="{{ __('Blog Management') }}" />

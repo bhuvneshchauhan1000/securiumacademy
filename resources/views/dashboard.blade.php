@@ -44,7 +44,24 @@
                             <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M22 10l-10-5L2 10l10 5 10-5z">
+                                    d="M3 21h18M5 21V9l7-4 7 4v12M9 21v-6h6v6M7 12h.01M12 12h.01M17 12h.01">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="mt-3 text-3xl font-bold text-gray-900 dark:text-gray-100">{{ $stats['universities'] }}</p>
+                </div>
+            @endcan
+
+            @can('view-academies')
+                <div class="rounded-xl bg-white dark:bg-gray-800 p-5 shadow-sm ring-1 ring-gray-200 dark:ring-gray-700">
+                    <div class="flex items-center justify-between">
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ __('Academies') }}</p>
+                        <div
+                            class="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-300">
+                            <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22 10l-10-5L2 10l10 5 10-5z">
                                 </path>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M6 12v4c0 1.5 3.5 3 6 3s6-1.5 6-3v-4"></path>
@@ -52,7 +69,7 @@
                             </svg>
                         </div>
                     </div>
-                    <p class="mt-3 text-3xl font-bold text-gray-900 dark:text-gray-100">{{ $stats['universities'] }}</p>
+                    <p class="mt-3 text-3xl font-bold text-gray-900 dark:text-gray-100">{{ $stats['academies'] }}</p>
                 </div>
             @endcan
 
@@ -183,11 +200,9 @@
                                 class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-teal-100 dark:bg-teal-900/50 text-teal-600 dark:text-teal-300">
                                 <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22 10l-10-5L2 10l10 5 10-5z">
-                                    </path>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M6 12v4c0 1.5 3.5 3 6 3s6-1.5 6-3v-4"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22 10v6"></path>
+                                        d="M3 21h18M5 21V9l7-4 7 4v12M9 21v-6h6v6M7 12h.01M12 12h.01M17 12h.01">
+                                    </path>
                                 </svg>
                             </div>
                             <div class="flex-1">
@@ -196,6 +211,37 @@
                                     {{ __('Create and manage universities') }}</div>
                             </div>
                             <svg class="h-5 w-5 text-gray-300 transition group-hover:translate-x-1 group-hover:text-teal-500 dark:text-gray-600"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </div>
+                    </a>
+                @endcan
+
+                @can('view-academies')
+                    <a href="{{ route('academies.index') }}"
+                        class="group relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm ring-1 ring-gray-200 dark:ring-gray-700 transition hover:shadow-md hover:ring-amber-300 dark:hover:ring-amber-700"
+                        x-show="!search || 'academies and academy management system'.includes(search.toLowerCase())">
+                        <div class="absolute inset-x-0 top-0 h-1 bg-amber-500"></div>
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-300">
+                                <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22 10l-10-5L2 10l10 5 10-5z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 12v4c0 1.5 3.5 3 6 3s6-1.5 6-3v-4"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22 10v6"></path>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-semibold text-gray-900 dark:text-gray-100">{{ __('Academies') }}</div>
+                                <div class="text-sm text-gray-500 dark:text-gray-400">{{ __('Manage academies ') }}
+                                </div>
+                            </div>
+                            <svg class="h-5 w-5 text-gray-300 transition group-hover:translate-x-1 group-hover:text-amber-500 dark:text-gray-600"
                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
                                 </path>

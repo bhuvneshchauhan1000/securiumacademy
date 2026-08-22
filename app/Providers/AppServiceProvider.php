@@ -14,9 +14,14 @@ use App\Events\BlogCreated;
 use App\Listeners\SendBlogCreatedNotification;
 use App\Events\BlogUpdated;
 use App\Listeners\SendBlogUpdatedNotification;
+use App\Models\Academy;
 use App\Models\University;
+use App\Observers\AcademyObserver;
 use App\Observers\UniversityObserver;
+use App\Policies\AcademyPolicy;
 use App\Policies\UniversityPolicy;
+use App\Repositories\AcademyRepository;
+use App\Repositories\Contracts\AcademyRepositoryInterface;
 use App\Repositories\Contracts\UniversityRepositoryInterface;
 use App\Repositories\UniversityRepository;
 
@@ -46,16 +51,17 @@ class AppServiceProvider extends ServiceProvider
             SendBlogUpdatedNotification::class
         );
 
-        $this->app->bind(
-            BlogRepositoryInterface::class,
-            BlogRepository::class
-        );
-
+        $this->app->bind(BlogRepositoryInterface::class,BlogRepository::class);
         $this->app->bind(UniversityRepositoryInterface::class, UniversityRepository::class);
+        $this->app->bind(AcademyRepositoryInterface::class,AcademyRepository::class);
 
         Gate::policy(Blog::class, BlogPolicy::class);
         Gate::policy(University::class, UniversityPolicy::class);
+        Gate::policy(Academy::class, AcademyPolicy::class);
+
+        
         Blog::observe(BlogObserver::class);
         University::observe(UniversityObserver::class);
+        Academy::observe(AcademyObserver::class);
     }
 }

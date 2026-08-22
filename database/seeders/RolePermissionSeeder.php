@@ -24,6 +24,12 @@ class RolePermissionSeeder extends Seeder
             // Dashboard
             'view-dashboard',
 
+            //Academy
+            'view-academies',
+            'create-academies',
+            'edit-academies',
+            'delete-academies',
+
             //University
             'view-universities',
             'create-universities',

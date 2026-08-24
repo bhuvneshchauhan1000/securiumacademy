@@ -73,6 +73,27 @@
                 </div>
             @endcan
 
+            @can('view-course-categories')
+                <div class="rounded-xl bg-white dark:bg-gray-800 p-5 shadow-sm ring-1 ring-gray-200 dark:ring-gray-700">
+                    <div class="flex items-center justify-between">
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ __('Course Category') }}</p>
+                        <div
+                            class="flex h-9 w-9 items-center justify-center rounded-lg bg-fuchsia-100 dark:bg-fuchsia-900/50 text-fuchsia-600 dark:text-fuchsia-300">
+                            <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V6z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 11h8M8 15h5">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="mt-3 text-3xl font-bold text-gray-900 dark:text-gray-100">{{ $stats['courseCategories'] }}</p>
+                </div>
+            @endcan
+
             @can('view-blogs')
                 <div class="rounded-xl bg-white dark:bg-gray-800 p-5 shadow-sm ring-1 ring-gray-200 dark:ring-gray-700">
                     <div class="flex items-center justify-between">
@@ -190,7 +211,7 @@
             </div>
 
             <div id="modules-grid" class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                 @can('view-universities')
+                @can('view-universities')
                     <a href="{{ route('universities.index') }}"
                         class="group relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm ring-1 ring-gray-200 dark:ring-gray-700 transition hover:shadow-md hover:ring-teal-300 dark:hover:ring-teal-700"
                         x-show="!search || 'university configuration and management'.includes(search.toLowerCase())">
@@ -242,6 +263,38 @@
                                 </div>
                             </div>
                             <svg class="h-5 w-5 text-gray-300 transition group-hover:translate-x-1 group-hover:text-amber-500 dark:text-gray-600"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </div>
+                    </a>
+                @endcan
+
+                @can('view-course-categories')
+                    <a href="{{ route('course-categories.index') }}"
+                        class="group relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm ring-1 ring-gray-200 dark:ring-gray-700 transition hover:shadow-md hover:ring-fuchsia-300 dark:hover:ring-fuchsia-700"
+                        x-show="!search || 'course category management system'.includes(search.toLowerCase())">
+                        <div class="absolute inset-x-0 top-0 h-1 bg-fuchsia-500"></div>
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-fuchsia-100 dark:bg-fuchsia-900/50 text-fuchsia-600 dark:text-fuchsia-300">
+                                <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V6z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 11h8M8 15h5">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-semibold text-gray-900 dark:text-gray-100">{{ __('Course Category') }}</div>
+                                <div class="text-sm text-gray-500 dark:text-gray-400">
+                                    {{ __('Manage application course category') }}</div>
+                            </div>
+                            <svg class="h-5 w-5 text-gray-300 transition group-hover:translate-x-1 group-hover:text-fuchsia-500 dark:text-gray-600"
                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
                                 </path>

@@ -24,6 +24,13 @@ class RolePermissionSeeder extends Seeder
             // Dashboard
             'view-dashboard',
 
+            //course category
+
+            'view-course-categories',
+            'create-course-categories',
+            'edit-course-categories',
+            'delete-course-categories',
+
             //Academy
             'view-academies',
             'create-academies',
@@ -139,5 +146,7 @@ class RolePermissionSeeder extends Seeder
             'create-blogs',
             'edit-blogs',
         ]);
+
+        $this->command->info('Role Permission seeding Complete successfully');
     }
 }

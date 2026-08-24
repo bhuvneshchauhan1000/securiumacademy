@@ -32,7 +32,7 @@
             </x-sidebar-link>
         @endcan
 
-        @canany(['view-universities', 'view-academies'])
+        @canany(['view-universities', 'view-academies', 'view-course-categories'])
             <x-sidebar-section label="{{ __('University Management') }}" />
         @endcanany
 
@@ -64,6 +64,22 @@
             </x-sidebar-link>
         @endcan
 
+        @can('view-course-categories')
+            <x-sidebar-link :href="route('course-categories.index')" :active="request()->routeIs('course-categories.*')">
+
+                <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 6a2 2 0 012-2h4l2 2h6a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V6z">
+                    </path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 11h8M8 15h5">
+                    </path>
+                </svg>
+
+                {{ __('Course Category') }}
+            </x-sidebar-link>
+        @endcan
 
         @canany(['view-blogs', 'view-blog-categories'])
             <x-sidebar-section label="{{ __('Blog Management') }}" />

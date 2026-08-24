@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\UniversityController;
 use App\Http\Controllers\Admin\AcademyController;
+use App\Http\Controllers\Admin\CourseCategoryController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 'blogCategories' => \App\Models\BlogCategory::count(),
                 'universities' => \App\Models\University::count(),
                 'academies' => \App\Models\Academy::count(),
+                'courseCategories' => \App\Models\CourseCategory::count(),
             ],
         ]);
     })->name('dashboard');
@@ -39,6 +41,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //     ]);
     // })->middleware('can:view-academies')->name('academies.index');
 
+    Route::controller(CourseCategoryController::class)->prefix('course-categories')->name('course-categories.')->group(function () {
+        Route::get('/', 'index')->name('index');
+
+        Route::get('/create', 'create')->name('create');
+
+        Route::post('/', 'store')->name('store');
+
+        Route::get('/{courseCategory}/edit', 'edit')->name('edit');
+
+        Route::put('/{courseCategory}', 'update')->name('update');
+
+        Route::delete('/{courseCategory}', 'destroy')->name('destroy');
+    });
+
     Route::controller(AcademyController::class)->prefix('academies')->name('academies.')->group(function () {
 
         Route::get('/', 'index')->name('index');
@@ -46,8 +62,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/create', 'create')->name('create');
 
         Route::post('/', 'store')->name('store');
-
-        Route::get('/{academy:slug}', 'show')->name('show');
 
         Route::get('/{academy}/edit', 'edit')->name('edit');
 
@@ -57,26 +71,26 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
 
-    Route::get('/universities',[UniversityController::class,'index'])->name('universities.index');
-    Route::get('/universities/create',[UniversityController::class,'create'])->name('universities.create');
-    Route::post('/universities',[UniversityController::class,'store'])->name('universities.store');
+    Route::get('/universities', [UniversityController::class, 'index'])->name('universities.index');
+    Route::get('/universities/create', [UniversityController::class, 'create'])->name('universities.create');
+    Route::post('/universities', [UniversityController::class, 'store'])->name('universities.store');
     Route::get('/universities/{university}/edit', [UniversityController::class, 'edit'])->name('universities.edit');
     Route::put('/universities/{university}', [UniversityController::class, 'update'])->name('universities.update');
     Route::delete('/universities/{university}', [UniversityController::class, 'destroy'])->name('universities.destroy');
 
-    Route::get('/blogs',[BlogController::class,'index'])->name('blogs.index');
-    Route::get('/blogs/create',[BlogController::class,'create'])->name('blogs.create');
-    Route::post('/blogs',[BlogController::class,'store'])->name('blogs.store');
+    Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
+    Route::get('/blogs/create', [BlogController::class, 'create'])->name('blogs.create');
+    Route::post('/blogs', [BlogController::class, 'store'])->name('blogs.store');
     Route::get('/blogs/{blog}/edit', [BlogController::class, 'edit'])->name('blogs.edit');
     Route::put('/blogs/{blog}', [BlogController::class, 'update'])->name('blogs.update');
     Route::delete('/blogs/{blog}', [BlogController::class, 'destroy'])->name('blogs.destroy');
 
-    Route::get('/blog-categories',[BlogCategoryController::class,'index'])
-    ->middleware('can:view-blog-categories')->name('blog-categories.index');
-    Route::get('/blog-categories/create',[BlogCategoryController::class,'create'])
-    ->middleware('can:create-blog-categories')->name('blog-categories.create');
-    Route::post('/blog-categories',[BlogCategoryController::class,'store'])
-    ->middleware('can:create-blog-categories')->name('blog-categories.store');
+    Route::get('/blog-categories', [BlogCategoryController::class, 'index'])
+        ->middleware('can:view-blog-categories')->name('blog-categories.index');
+    Route::get('/blog-categories/create', [BlogCategoryController::class, 'create'])
+        ->middleware('can:create-blog-categories')->name('blog-categories.create');
+    Route::post('/blog-categories', [BlogCategoryController::class, 'store'])
+        ->middleware('can:create-blog-categories')->name('blog-categories.store');
     Route::get('/blog-categories/{blogCategory}/edit', [BlogCategoryController::class, 'edit'])
         ->middleware('can:edit-blog-categories')->name('blog-categories.edit');
     Route::put('/blog-categories/{blogCategory}', [BlogCategoryController::class, 'update'])
@@ -134,4 +148,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

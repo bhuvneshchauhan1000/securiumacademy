@@ -77,6 +77,14 @@
                             action="{{ route('courses.index') }}"
                             class="flex flex-col gap-2 sm:flex-row">
 
+                            @if (!empty($academyFilter))
+                                <input type="hidden" name="academy_id" value="{{ $academyFilter->id }}">
+                            @endif
+
+                            @if (!empty($universityFilter))
+                                <input type="hidden" name="university_id" value="{{ $universityFilter->id }}">
+                            @endif
+
                             <div class="relative">
 
                                 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -157,6 +165,50 @@
                     </div>
 
                 </div>
+
+
+                {{-- ========================================================= --}}
+                {{-- Source Filter Notice --}}
+                {{-- ========================================================= --}}
+
+                @if (!empty($academyFilter) || !empty($universityFilter))
+
+                    <div
+                        class="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-sky-200 bg-sky-50 px-4 py-3 dark:border-sky-800 dark:bg-sky-900/20">
+
+                        <p class="flex items-center gap-2 text-sm text-sky-800 dark:text-sky-300">
+
+                            <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z">
+                                </path>
+
+                            </svg>
+
+                            {{ __('Showing courses for') }}
+
+                            <span class="font-semibold">
+                                {{ $academyFilter?->name ?? $universityFilter?->name }}
+                            </span>
+
+                            <span class="rounded-full bg-sky-200 px-2 py-0.5 text-xs font-semibold text-sky-800 dark:bg-sky-800 dark:text-sky-200">
+                                {{ $courses->total() }} {{ __('courses') }}
+                            </span>
+
+                        </p>
+
+                        <a href="{{ route('courses.index') }}"
+                            class="text-xs font-semibold uppercase tracking-widest text-sky-700 hover:text-sky-500 dark:text-sky-300 dark:hover:text-sky-100">
+
+                            {{ __('Show All Courses') }}
+
+                        </a>
+
+                    </div>
+
+                @endif
 
 
                 {{-- ========================================================= --}}
@@ -280,6 +332,10 @@
                                     </th>
 
                                     <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                                        {{ __('Course Source') }}
+                                    </th>
+
+                                    <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
                                         {{ __('Level') }}
                                     </th>
 
@@ -389,6 +445,62 @@
 
                                                 <span class="text-sm text-gray-400 dark:text-gray-500">
                                                     {{ __('Uncategorized') }}
+                                                </span>
+
+                                            @endif
+
+                                        </td>
+
+
+                                        {{-- Course Source --}}
+                                        <td class="px-6 py-4">
+
+                                            @if ($course->academy)
+
+                                                <a href="{{ route('courses.index', ['academy_id' => $course->academy->id]) }}"
+                                                    title="{{ __('View all courses of this academy') }}"
+                                                    class="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-medium text-amber-700 transition hover:bg-amber-200 dark:bg-amber-900/50 dark:text-amber-300 dark:hover:bg-amber-900">
+
+                                                    <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                                        </path>
+
+                                                    </svg>
+
+                                                    {{ $course->academy->name }}
+
+                                                </a>
+
+                                            @elseif ($course->university)
+
+                                                <a href="{{ route('courses.index', ['university_id' => $course->university->id]) }}"
+                                                    title="{{ __('View all courses of this university') }}"
+                                                    class="inline-flex items-center gap-1 rounded-full bg-teal-100 px-2.5 py-1 text-xs font-medium text-teal-700 transition hover:bg-teal-200 dark:bg-teal-900/50 dark:text-teal-300 dark:hover:bg-teal-900">
+
+                                                    <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M12 14l9-5-9-5-9 5 9 5z">
+                                                        </path>
+
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M5 12v5c0 1.657 3.134 3 7 3s7-1.343 7-3v-5">
+                                                        </path>
+
+                                                    </svg>
+
+                                                    {{ $course->university->name }}
+
+                                                </a>
+
+                                            @else
+
+                                                <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400">
+
+                                                    {{ __('Standalone') }}
+
                                                 </span>
 
                                             @endif

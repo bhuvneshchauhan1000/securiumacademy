@@ -11,12 +11,42 @@ use Illuminate\Support\Facades\Storage;
 
 class CourseService
 {
-    protected CourseRepositoryInterface $repository;
+    private CourseRepositoryInterface $repository;
 
     public function __construct(
         CourseRepositoryInterface $repository
     ) {
         $this->repository = $repository;
+    }
+
+    /**
+     * Resolve the course source (academy or university) into
+     * academy_id and university_id.
+     */
+    protected function resolveCourseSource(array $data): array
+    {
+        /*
+        |--------------------------------------------------------------------------
+        | Course Source (Academy / University / None)
+        |--------------------------------------------------------------------------
+        */
+
+        $source = $data['course_source'] ?? 'none';
+
+        if ($source === 'academy') {
+            $data['academy_id'] = $data['academy_id'] ?? null;
+            $data['university_id'] = null;
+        } elseif ($source === 'university') {
+            $data['university_id'] = $data['university_id'] ?? null;
+            $data['academy_id'] = null;
+        } else {
+            $data['academy_id'] = null;
+            $data['university_id'] = null;
+        }
+
+        unset($data['course_source']);
+
+        return $data;
     }
 
     /**
@@ -27,6 +57,14 @@ class CourseService
         ?UploadedFile $featuredImage = null,
         ?UploadedFile $certificateImage = null
     ): Course {
+
+        /*
+        |--------------------------------------------------------------------------
+        | Resolve course source
+        |--------------------------------------------------------------------------
+        */
+
+        $data = $this->resolveCourseSource($data);
 
         /*
         |--------------------------------------------------------------------------
@@ -82,6 +120,14 @@ class CourseService
         ?UploadedFile $featuredImage = null,
         ?UploadedFile $certificateImage = null
     ): Course {
+
+        /*
+        |--------------------------------------------------------------------------
+        | Resolve course source
+        |--------------------------------------------------------------------------
+        */
+
+        $data = $this->resolveCourseSource($data);
 
         if ($featuredImage) {
             if ($course->featured_image) {

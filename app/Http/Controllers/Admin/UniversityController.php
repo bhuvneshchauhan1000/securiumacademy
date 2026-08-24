@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\University;
-use Illuminate\Http\Request;
 use App\Services\UniversityService;
+use Illuminate\Http\Request;
 
 class UniversityController extends Controller
 {
@@ -15,13 +15,14 @@ class UniversityController extends Controller
     {
         $this->universityService = $universityService;
     }
+
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
         //
-        $this->authorize("viewAny", University::class);
+        $this->authorize('viewAny', University::class);
         $universities = University::query()
             ->when($request->filled('search'), function ($query) use ($request) {
                 $search = trim($request->input('search'));
@@ -33,10 +34,12 @@ class UniversityController extends Controller
                         ->orWhere('country', 'like', "%{$search}%");
                 });
             })
+            ->withCount('courses')
             ->latest()
             ->paginate(15)
             ->withQueryString();
-        return view("admin.universities.index", compact("universities"));
+
+        return view('admin.universities.index', compact('universities'));
     }
 
     /**
@@ -45,8 +48,9 @@ class UniversityController extends Controller
     public function create()
     {
         //
-        $this->authorize("create", University::class);
-        return view("admin.universities.create");
+        $this->authorize('create', University::class);
+
+        return view('admin.universities.create');
     }
 
     /**
@@ -55,19 +59,20 @@ class UniversityController extends Controller
     public function store(Request $request)
     {
         //
-        $this->authorize("store", University::class);
+        $this->authorize('store', University::class);
 
         $validated = $request->validate([
-            "name" => ["required", "string", "max:255"],
-            "country" => ["nullable", "string"],
-            "description" => ["nullable", "string"],
-            "website_url" => ["nullable", "string"],
-            "sort_order" => ["nullable", "integer", "min:0"],
-            "status" => ["required", "in:active,inactive"],
-            "logo" => ["nullable", "image", "mimes:jpeg,jpg,png,webp", 'max:20480'],
+            'name' => ['required', 'string', 'max:255'],
+            'country' => ['nullable', 'string'],
+            'description' => ['nullable', 'string'],
+            'website_url' => ['nullable', 'string'],
+            'sort_order' => ['nullable', 'integer', 'min:0'],
+            'status' => ['required', 'in:active,inactive'],
+            'logo' => ['nullable', 'image', 'mimes:jpeg,jpg,png,webp', 'max:20480'],
         ]);
 
-        $this->universityService->create($validated,$request->hasFile('logo') ? $request->file('logo') : null);
+        $this->universityService->create($validated, $request->hasFile('logo') ? $request->file('logo') : null);
+
         return redirect()->route('universities.index')->with('success', 'University Created Successfully');
     }
 
@@ -91,13 +96,14 @@ class UniversityController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'country' => ['nullable', 'string'],
             'description' => ['nullable', 'string'],
-            "website_url" => ["nullable", "string"],
-            "sort_order" => ["nullable", "integer", "min:0"],
+            'website_url' => ['nullable', 'string'],
+            'sort_order' => ['nullable', 'integer', 'min:0'],
             'logo' => ['nullable', 'image', 'mimes:jpeg,jpg,png,webp', 'max:20480'],
             'status' => ['required', 'in:active,inactive'],
         ]);
 
         $this->universityService->update($university, $validated, $request->file('logo'));
+
         return redirect()->route('universities.index')->with('success', 'University updated successfully');
     }
 
@@ -109,6 +115,7 @@ class UniversityController extends Controller
         //
         $this->authorize('delete', $university);
         $this->universityService->delete($university);
-        return redirect()->route('universities.index')->with('success','University Deleted Successfully');
+
+        return redirect()->route('universities.index')->with('success', 'University Deleted Successfully');
     }
 }

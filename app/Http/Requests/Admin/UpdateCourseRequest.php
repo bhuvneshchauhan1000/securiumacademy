@@ -106,6 +106,23 @@ class UpdateCourseRequest extends FormRequest
                 'in:draft,published',
             ],
 
+            'course_source' => [
+                'required',
+                'in:none,academy,university',
+            ],
+
+            'academy_id' => [
+                'nullable',
+                'required_if:course_source,academy',
+                Rule::exists('academies', 'id'),
+            ],
+
+            'university_id' => [
+                'nullable',
+                'required_if:course_source,university',
+                Rule::exists('universities', 'id'),
+            ],
+
             'is_featured' => [
                 'nullable',
                 'boolean',
@@ -198,6 +215,15 @@ class UpdateCourseRequest extends FormRequest
 
             'status.required' => __('The status field is required.'),
             'status.in' => __('The selected status is invalid.'),
+
+            'course_source.required' => __('Please select where this course belongs.'),
+            'course_source.in' => __('The selected course source is invalid.'),
+
+            'academy_id.required_if' => __('Please select an academy.'),
+            'academy_id.exists' => __('The selected academy is invalid.'),
+
+            'university_id.required_if' => __('Please select a university.'),
+            'university_id.exists' => __('The selected university is invalid.'),
 
             'meta_title.max' => __('The meta title may not be greater than :max characters.'),
             'meta_keywords.max' => __('The meta keywords may not be greater than :max characters.'),

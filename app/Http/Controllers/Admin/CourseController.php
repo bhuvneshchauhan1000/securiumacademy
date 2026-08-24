@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreCourseRequest;
 use App\Http\Requests\Admin\UpdateCourseRequest;
+use App\Models\Academy;
 use App\Models\Course;
 use App\Models\CourseCategory;
+use App\Models\University;
 use App\Services\CourseService;
 use Illuminate\Http\Request;
 
@@ -23,7 +25,13 @@ class CourseController extends Controller
     public function index(Request $request)
     {
         $this->authorize('viewAny', Course::class);
-        $courses = Course::with('courseCategory')
+        $courses = Course::with(['courseCategory', 'academy', 'university'])
+            ->when($request->filled('academy_id'), function ($query) use ($request) {
+                $query->where('academy_id', $request->input('academy_id'));
+            })
+            ->when($request->filled('university_id'), function ($query) use ($request) {
+                $query->where('university_id', $request->input('university_id'));
+            })
             ->when($request->filled('search'), function ($query) use ($request) {
                 $search = $request->input('search');
                 $query->where(function ($q) use ($search) {
@@ -39,15 +47,32 @@ class CourseController extends Controller
             ->paginate(15)
             ->withQueryString();
 
-        return view('admin.courses.index', compact('courses'));
+        $academyFilter = $request->filled('academy_id')
+            ? Academy::find($request->input('academy_id'))
+            : null;
+        $universityFilter = $request->filled('university_id')
+            ? University::find($request->input('university_id'))
+            : null;
+
+        return view('admin.courses.index', compact(
+            'courses',
+            'academyFilter',
+            'universityFilter'
+        ));
     }
 
     public function create()
     {
         $this->authorize('create', Course::class);
         $courseCategories = CourseCategory::active();
+        $academies = Academy::orderBy('name')->get();
+        $universities = University::orderBy('name')->get();
 
-        return view('admin.courses.create', compact('courseCategories'));
+        return view('admin.courses.create', compact(
+            'courseCategories',
+            'academies',
+            'universities'
+        ));
     }
 
     public function store(StoreCourseRequest $request)
@@ -72,8 +97,15 @@ class CourseController extends Controller
     {
         $this->authorize('edit', Course::class);
         $courseCategories = CourseCategory::active();
+        $academies = Academy::orderBy('name')->get();
+        $universities = University::orderBy('name')->get();
 
-        return view('admin.courses.edit', compact('course', 'courseCategories'));
+        return view('admin.courses.edit', compact(
+            'course',
+            'courseCategories',
+            'academies',
+            'universities'
+        ));
     }
 
     public function update(UpdateCourseRequest $request, Course $course)
@@ -101,6 +133,6 @@ class CourseController extends Controller
 
         $this->courseService->delete($course);
 
-        return redirect()->route('courses.index')->with('success','Course deleted successfully');
+        return redirect()->route('courses.index')->with('success', 'Course deleted successfully');
     }
 }

@@ -2,15 +2,17 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
+use App\Models\Academy;
 use App\Models\Course;
 use App\Models\CourseCategory;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Schema;
+use App\Models\University;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
+
 class CourseSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      */
@@ -18,16 +20,19 @@ class CourseSeeder extends Seeder
     {
 
         Schema::disableForeignKeyConstraints();
-        DB::table("courses")->truncate();
+        DB::table('courses')->truncate();
         Schema::enableForeignKeyConstraints();
 
         $courseCategory = CourseCategory::pluck('id')->toArray();
 
+        $universities = University::pluck('id')->toArray();
+        $academies = Academy::pluck('id')->toArray();
+
         if (empty($courseCategory)) {
             $this->command->error('No Course Category found. Please seed Course Category first.');
+
             return;
         }
-
 
         $courses = [
             [
@@ -192,6 +197,29 @@ class CourseSeeder extends Seeder
             $course['meta_title'] = $course['name'] . ' | Securium Academy';
             $course['meta_description'] = 'Enroll in ' . $course['name'] . ' at Securium Academy. ' . ($course['duration'] ?? '') . ' of expert-led training with global certification.';
             $course['meta_keywords'] = Str::lower($course['name']) . ', securium academy, cybersecurity training';
+
+            /*
+            |--------------------------------------------------------------------------
+            | Attach the course to an academy or a university
+            |--------------------------------------------------------------------------
+            |
+            | Weighted random: 40% academy, 40% university, 20% standalone.
+            | Falls back to standalone when no academies/universities exist yet.
+            |
+            */
+
+            $source = fake()->randomElement(['academy', 'academy', 'university', 'university', 'none']);
+
+            if ($source === 'academy' && !empty($academies)) {
+                $course['academy_id'] = fake()->randomElement($academies);
+                $course['university_id'] = null;
+            } elseif ($source === 'university' && !empty($universities)) {
+                $course['university_id'] = fake()->randomElement($universities);
+                $course['academy_id'] = null;
+            } else {
+                $course['academy_id'] = null;
+                $course['university_id'] = null;
+            }
 
             Course::updateOrCreate(
                 $course

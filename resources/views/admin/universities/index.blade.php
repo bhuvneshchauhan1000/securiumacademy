@@ -268,6 +268,10 @@
                                         {{ __('Sort Order') }}
                                     </th>
 
+                                    <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                                        {{ __('Courses') }}
+                                    </th>
+
                                     <th class="px-6 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-gray-400">
                                         {{ __('Actions') }}
                                     </th>
@@ -444,6 +448,34 @@
                                                 {{ $university->sort_order ?? 0 }}
 
                                             </span>
+
+                                        </td>
+
+
+                                        {{-- ================================================= --}}
+                                        {{-- Courses --}}
+                                        {{-- ================================================= --}}
+                                        <td class="px-6 py-4">
+
+                                            <a href="{{ route('courses.index', ['university_id' => $university->id]) }}"
+                                                title="{{ __('View courses of this university') }}"
+                                                class="inline-flex items-center gap-1.5 rounded-full bg-teal-100 px-2.5 py-1 text-xs font-semibold text-teal-700 transition hover:bg-teal-200 focus:outline-none focus:ring-2 focus:ring-teal-500 dark:bg-teal-900/50 dark:text-teal-300 dark:hover:bg-teal-900">
+
+                                                <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M4 19.5A2.5 2.5 0 016.5 17H20">
+                                                    </path>
+
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z">
+                                                    </path>
+
+                                                </svg>
+
+                                                {{ $university->courses_count }} {{ __('Courses') }}
+
+                                            </a>
 
                                         </td>
 

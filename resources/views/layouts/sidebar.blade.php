@@ -120,17 +120,6 @@
             <x-sidebar-section label="{{ __('Blog Management') }}" />
         @endcanany
 
-        @can('view-blogs')
-            <x-sidebar-link :href="route('blogs.index')" :active="request()->routeIs('blogs.*')">
-                <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M8 12h8m-8 4h5m-9-9h14a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V9a2 2 0 012-2z"></path>
-                </svg>
-                {{ __('Blog Posts') }}
-            </x-sidebar-link>
-        @endcan
-
         @can('view-blog-categories')
             <x-sidebar-link :href="route('blog-categories.index')" :active="request()->routeIs('blog-categories.*')">
                 <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -139,6 +128,17 @@
                         d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
                 </svg>
                 {{ __('Blog Categories') }}
+            </x-sidebar-link>
+        @endcan
+
+        @can('view-blogs')
+            <x-sidebar-link :href="route('blogs.index')" :active="request()->routeIs('blogs.*')">
+                <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 12h8m-8 4h5m-9-9h14a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V9a2 2 0 012-2z"></path>
+                </svg>
+                {{ __('Blog Posts') }}
             </x-sidebar-link>
         @endcan
 

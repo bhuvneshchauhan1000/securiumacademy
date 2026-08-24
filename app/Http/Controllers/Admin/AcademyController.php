@@ -22,19 +22,21 @@ class AcademyController extends Controller
     public function index(Request $request)
     {
         //
-        $this->authorize("viewAny", Academy::class);
+        $this->authorize('viewAny', Academy::class);
         $academies = Academy::query()
-        ->when($request->filled("filled"),function ($query) use ($request){
-            $search = trim($request->input("search"));
-            $query->where(function ($q) use ($search){
-                $q->where("name","like","%".$search."%")
-                ->orWhere("country","like","%".$search."%")
-                ->orWhere("website_url","like","%".$search."%");
-                
-            });
-        })->latest()
-        ->paginate(15)
-        ->withQueryString();
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $search = trim($request->input('search'));
+                $query->where(function ($q) use ($search) {
+                    $q->where('name', 'like', '%'.$search.'%')
+                        ->orWhere('country', 'like', '%'.$search.'%')
+                        ->orWhere('website_url', 'like', '%'.$search.'%');
+
+                });
+            })->withCount('courses')
+            ->latest()
+            ->paginate(15)
+            ->withQueryString();
+
         return view('admin.academies.index', compact('academies'));
     }
 
@@ -45,6 +47,7 @@ class AcademyController extends Controller
     {
         //
         $this->authorize('create', Academy::class);
+
         return view('admin.academies.create');
     }
 
@@ -56,16 +59,17 @@ class AcademyController extends Controller
         //
         $this->authorize('store', Academy::class);
         $validated = $request->validate([
-            'name'=> ['required','string','max:255'],
-            'country'=> ['nullable','string'],
-            'description'=> ['nullable','string'],
-            'website_url'=> ['nullable','string'],
-            'status'=> ['required','in:active,inactive'],
-            'logo' => ['nullable','image','mimes:jpeg,jpg,png,webp','max:20480']
+            'name' => ['required', 'string', 'max:255'],
+            'country' => ['nullable', 'string'],
+            'description' => ['nullable', 'string'],
+            'website_url' => ['nullable', 'string'],
+            'status' => ['required', 'in:active,inactive'],
+            'logo' => ['nullable', 'image', 'mimes:jpeg,jpg,png,webp', 'max:20480'],
         ]);
 
         $this->academyService->create($validated, $request->hasFile('logo') ? $request->file('logo') : null);
-        return redirect()->route('academies.index')->with('success','Academy Created Successfully');
+
+        return redirect()->route('academies.index')->with('success', 'Academy Created Successfully');
 
     }
 
@@ -84,6 +88,7 @@ class AcademyController extends Controller
     {
         //
         $this->authorize('edit', Academy::class);
+
         return view('admin.academies.edit', compact('academy'));
     }
 
@@ -95,15 +100,16 @@ class AcademyController extends Controller
         //
         $this->authorize('update', $academy);
         $validated = $request->validate([
-            'name'=> ['required','string','max:255'],
-            'country'=> ['nullable','string'],
-            'description'=> ['nullable','string'],
-            'website_url'=> ['nullable','string'],
-            'status'=> ['required','in:active,inactive'],
-            'logo'=> ['nullable','image','mimes:jpeg,jpg,png,webp','max:20480']
+            'name' => ['required', 'string', 'max:255'],
+            'country' => ['nullable', 'string'],
+            'description' => ['nullable', 'string'],
+            'website_url' => ['nullable', 'string'],
+            'status' => ['required', 'in:active,inactive'],
+            'logo' => ['nullable', 'image', 'mimes:jpeg,jpg,png,webp', 'max:20480'],
         ]);
         $this->academyService->update($academy, $validated, $request->hasFile('logo') ? $request->file('logo') : null);
-        return redirect()->route('academies.index')->with('success','Academy Updated Successfully');
+
+        return redirect()->route('academies.index')->with('success', 'Academy Updated Successfully');
     }
 
     /**
@@ -114,6 +120,7 @@ class AcademyController extends Controller
         //
         $this->authorize('delete', $academy);
         $this->academyService->delete($academy);
-        return redirect()->route('academies.index')->with('success','Academy Delete Successfully');
+
+        return redirect()->route('academies.index')->with('success', 'Academy Delete Successfully');
     }
 }

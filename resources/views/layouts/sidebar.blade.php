@@ -32,7 +32,7 @@
             </x-sidebar-link>
         @endcan
 
-        @canany(['view-universities', 'view-academies', 'view-course-categories'])
+        @canany(['view-universities', 'view-academies', 'view-course-categories','view-courses'])
             <x-sidebar-section label="{{ __('University Management') }}" />
         @endcanany
 
@@ -49,6 +49,7 @@
                 {{ __('University') }}
             </x-sidebar-link>
         @endcan
+
         @can('view-academies')
             <x-sidebar-link :href="route('academies.index')" :active="request()->routeIs('academies.*')">
 
@@ -78,6 +79,40 @@
                 </svg>
 
                 {{ __('Course Category') }}
+            </x-sidebar-link>
+        @endcan
+
+        @can('view-courses')
+            <x-sidebar-link :href="route('courses.index')" :active="request()->routeIs('courses.*')">
+
+                <svg class="h-5 w-5 shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+
+                    <path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 19.5A2.5 2.5 0 016.5 17H20">
+                    </path>
+
+                    <path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z">
+                    </path>
+
+                    <path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 6h8M8 10h8M8 14h5">
+                    </path>
+
+                </svg>
+
+
+                {{ __('Courses') }}
             </x-sidebar-link>
         @endcan
 

@@ -29,7 +29,7 @@ return new class extends Migration {
             $table->foreignId('blog_categories_id')->constrained('blog_categories')->cascadeOnDelete();
             $table->timestamps();
 
-            $table->index(['title', 'slug', 'tags']);
+            $table->index(['title', 'slug', 'tags'],'blogs_search_index');
         });
     }
 

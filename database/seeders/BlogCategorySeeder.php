@@ -58,5 +58,7 @@ class BlogCategorySeeder extends Seeder
         foreach ($categories as $category) {
             BlogCategory::create($category);
         }
+
+        $this->command->info('Blog category seeding completed successfully.');
     }
 }

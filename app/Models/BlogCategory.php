@@ -20,8 +20,9 @@ class BlogCategory extends Model
         'status',
     ];
 
-    protected static function booted()
+    protected static function boot()
     {
+        parent::boot();
         static::creating(function ($category) {
             $category->slug = static::generateUniqueSlug($category->name);
         });

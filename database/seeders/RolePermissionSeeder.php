@@ -24,8 +24,13 @@ class RolePermissionSeeder extends Seeder
             // Dashboard
             'view-dashboard',
 
-            //course category
+            //courses
+            'view-courses',
+            'create-courses',
+            'edit-courses',
+            'delete-courses',
 
+            //course category
             'view-course-categories',
             'create-course-categories',
             'edit-course-categories',

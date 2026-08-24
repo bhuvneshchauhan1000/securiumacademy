@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Support\HasHashIdRouteBinding;
+use App\Models\Course;
 
 class CourseCategory extends Model
 {
@@ -18,5 +19,16 @@ class CourseCategory extends Model
         "logo",
         "status"
     ];
+
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
+
+    public static function active()
+    {
+        return static::where('status', 'active')->get();
+    }
+
 
 }

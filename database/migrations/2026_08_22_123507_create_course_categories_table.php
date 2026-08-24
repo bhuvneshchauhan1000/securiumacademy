@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('logo')->nullable();
             $table->enum('status', ['active','inactive'])->default('active');
             $table->timestamps();
+            $table->index(['name','status'],'course_category_search_index');
         });
     }
 

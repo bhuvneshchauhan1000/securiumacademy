@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\UniversityController;
 use App\Http\Controllers\Admin\AcademyController;
 use App\Http\Controllers\Admin\CourseCategoryController;
+use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,16 +31,32 @@ Route::middleware(['auth', 'verified'])->group(function () {
                 'universities' => \App\Models\University::count(),
                 'academies' => \App\Models\Academy::count(),
                 'courseCategories' => \App\Models\CourseCategory::count(),
+                'courses' =>   \App\Models\Course::count(),
             ],
         ]);
     })->name('dashboard');
 
-    // Route::get('/academies', function () {
+    // Route::get('/courses', function () {
     //     return view('admin.index', [
-    //         'title' => 'Academy',
-    //         'description' => 'Manage Academy from here.',
+    //         'title' => 'Courses',
+    //         'description' => 'Manage Course from here.',
     //     ]);
-    // })->middleware('can:view-academies')->name('academies.index');
+    // })->middleware('can:view-courses')->name('courses.index');
+
+    Route::controller(CourseController::class)->prefix('courses')->name('courses.')->group(function () {
+        Route::get('/', 'index')->name('index');
+
+        Route::get('/create', 'create')->name('create');
+
+        Route::post('/', 'store')->name('store');
+
+        Route::get('/{course}/edit', 'edit')->name('edit');
+
+        Route::put('/{course}', 'update')->name('update');
+
+        Route::delete('/{course}', 'destroy')->name('destroy');
+    });
+
 
     Route::controller(CourseCategoryController::class)->prefix('course-categories')->name('course-categories.')->group(function () {
         Route::get('/', 'index')->name('index');

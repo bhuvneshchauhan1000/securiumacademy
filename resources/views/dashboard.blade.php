@@ -94,20 +94,41 @@
                 </div>
             @endcan
 
-            @can('view-blogs')
+            @can('view-courses')
                 <div class="rounded-xl bg-white dark:bg-gray-800 p-5 shadow-sm ring-1 ring-gray-200 dark:ring-gray-700">
                     <div class="flex items-center justify-between">
-                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ __('Blog Posts') }}</p>
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ __('Courses') }}</p>
                         <div
-                            class="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300">
-                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M8 12h8m-8 4h5m-9-9h14a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V9a2 2 0 012-2z">
+                            class="flex h-9 w-9 items-center justify-center rounded-lg rounded-lg bg-sky-100 dark:bg-sky-900/50 text-sky-600 dark:text-sky-300">
+                            <svg class="h-5 w-5 shrink-0"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+
+                                <path stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M4 19.5A2.5 2.5 0 016.5 17H20">
                                 </path>
+
+                                <path stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z">
+                                </path>
+
+                                <path stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M8 6h8M8 10h8M8 14h5">
+                                </path>
+
                             </svg>
+
                         </div>
                     </div>
-                    <p class="mt-3 text-3xl font-bold text-gray-900 dark:text-gray-100">{{ $stats['blogs'] }}</p>
+                    <p class="mt-3 text-3xl font-bold text-gray-900 dark:text-gray-100">{{ $stats['courses'] }}</p>
                 </div>
             @endcan
 
@@ -124,6 +145,23 @@
                         </div>
                     </div>
                     <p class="mt-3 text-3xl font-bold text-gray-900 dark:text-gray-100">{{ $stats['blogCategories'] }}</p>
+                </div>
+            @endcan
+
+            @can('view-blogs')
+                <div class="rounded-xl bg-white dark:bg-gray-800 p-5 shadow-sm ring-1 ring-gray-200 dark:ring-gray-700">
+                    <div class="flex items-center justify-between">
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ __('Blog Posts') }}</p>
+                        <div
+                            class="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 12h8m-8 4h5m-9-9h14a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V9a2 2 0 012-2z">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                    <p class="mt-3 text-3xl font-bold text-gray-900 dark:text-gray-100">{{ $stats['blogs'] }}</p>
                 </div>
             @endcan
 
@@ -303,26 +341,47 @@
                     </a>
                 @endcan
                 
-                @can('view-blogs')
-                    <a href="{{ route('blogs.index') }}"
-                        class="group relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm ring-1 ring-gray-200 dark:ring-gray-700 transition hover:shadow-md hover:ring-indigo-300 dark:hover:ring-indigo-700"
-                        x-show="!search || 'blog posts blogs article'.includes(search.toLowerCase())">
-                        <div class="absolute inset-x-0 top-0 h-1 bg-indigo-500"></div>
+                @can('view-courses')
+                    <a href="{{ route('courses.index') }}"
+                        class="group relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm ring-1 ring-gray-200 dark:ring-gray-700 transition hover:shadow-md hover:ring-sky-300 dark:hover:ring-sky-700"
+                        x-show="!search || 'course and courses management'.includes(search.toLowerCase())">
+                        <div class="absolute inset-x-0 top-0 h-1 bg-sky-500"></div>
                         <div class="flex items-center gap-4">
                             <div
-                                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300">
-                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M8 12h8m-8 4h5m-9-9h14a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V9a2 2 0 012-2z">
+                                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-sky-100 dark:bg-sky-900/50 text-sky-600 dark:text-sky-300">
+                                <svg class="h-5 w-5 shrink-0"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+
+                                    <path stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M4 19.5A2.5 2.5 0 016.5 17H20">
                                     </path>
+
+                                    <path stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z">
+                                    </path>
+
+                                    <path stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M8 6h8M8 10h8M8 14h5">
+                                    </path>
+
                                 </svg>
+
                             </div>
                             <div class="flex-1">
-                                <div class="font-semibold text-gray-900 dark:text-gray-100">{{ __('Blog Posts') }}</div>
-                                <div class="text-sm text-gray-500 dark:text-gray-400">
-                                    {{ __('Create and manage blog posts') }}</div>
+                                <div class="font-semibold text-gray-900 dark:text-gray-100">{{ __('Courses') }}</div>
+                                <div class="text-sm text-gray-500 dark:text-gray-400">{{ __('Manage application Courses') }}
+                                </div>
                             </div>
-                            <svg class="h-5 w-5 text-gray-300 transition group-hover:translate-x-1 group-hover:text-indigo-500 dark:text-gray-600"
+                            <svg class="h-5 w-5 text-gray-300 transition group-hover:translate-x-1 group-hover:text-sky-500 dark:text-gray-600"
                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
                                 </path>
@@ -359,6 +418,35 @@
                         </div>
                     </a>
                 @endcan
+
+                @can('view-blogs')
+                    <a href="{{ route('blogs.index') }}"
+                        class="group relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm ring-1 ring-gray-200 dark:ring-gray-700 transition hover:shadow-md hover:ring-indigo-300 dark:hover:ring-indigo-700"
+                        x-show="!search || 'blog posts blogs article'.includes(search.toLowerCase())">
+                        <div class="absolute inset-x-0 top-0 h-1 bg-indigo-500"></div>
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300">
+                                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 12h8m-8 4h5m-9-9h14a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V9a2 2 0 012-2z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-semibold text-gray-900 dark:text-gray-100">{{ __('Blog Posts') }}</div>
+                                <div class="text-sm text-gray-500 dark:text-gray-400">
+                                    {{ __('Create and manage blog posts') }}</div>
+                            </div>
+                            <svg class="h-5 w-5 text-gray-300 transition group-hover:translate-x-1 group-hover:text-indigo-500 dark:text-gray-600"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </div>
+                    </a>
+                @endcan
+
 
                 @can('view-users')
                     <a href="{{ route('users.index') }}"

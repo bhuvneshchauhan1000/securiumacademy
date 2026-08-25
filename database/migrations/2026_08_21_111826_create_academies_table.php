@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('academies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('slug')->unique('slug');
+            $table->string('slug')->unique();
             $table->string('logo')->nullable();
             $table->string('country')->nullable();
             $table->text('description')->nullable();
             $table->string('website_url')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
-            $table->index('name','idx_name');
-            $table->index('website_url','idx_website_url');
+            $table->index('name', 'academies_name_index');
+            $table->index('website_url', 'academies_website_url_index');
         });
     }
 

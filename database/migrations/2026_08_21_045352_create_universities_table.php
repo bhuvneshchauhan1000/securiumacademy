@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('universities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('slug')->unique('slug');
+            $table->string('slug')->unique();
             $table->string('logo')->nullable();
             $table->string('country')->nullable();
             $table->text('description')->nullable();
@@ -22,8 +22,8 @@ return new class extends Migration
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->integer('sort_order')->default(0);
             $table->timestamps();
-            $table->index('name','idx_name');
-            $table->index('website_url','idx_website_url');
+            $table->index('name', 'universities_name_index');
+            $table->index('website_url', 'universities_website_url_index');
         });
     }
 

@@ -3,15 +3,16 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionRegistrar;
 
 class RolePermissionSeeder extends Seeder
 {
     public function run(): void
     {
         // Reset cached roles and permissions
-        app()[\Spatie\Permission\PermissionRegistrar::class]
+        app()[PermissionRegistrar::class]
             ->forgetCachedPermissions();
 
         /*
@@ -24,25 +25,45 @@ class RolePermissionSeeder extends Seeder
             // Dashboard
             'view-dashboard',
 
-            //courses
+            // job categoried
+            'view-job-categories',
+            'create-job-categories',
+            'edit-job-categories',
+            'delete-job-categories',
+
+            // job type
+
+            'view-job-types',
+            'create-job-types',
+            'edit-job-types',
+            'delete-job-types',
+
+            // job category
+
+            'view-job-categories',
+            'create-job-categories',
+            'edit-job-categories',
+            'delete-job-categories',
+
+            // courses
             'view-courses',
             'create-courses',
             'edit-courses',
             'delete-courses',
 
-            //course category
+            // course category
             'view-course-categories',
             'create-course-categories',
             'edit-course-categories',
             'delete-course-categories',
 
-            //Academy
+            // Academy
             'view-academies',
             'create-academies',
             'edit-academies',
             'delete-academies',
 
-            //University
+            // University
             'view-universities',
             'create-universities',
             'edit-universities',
@@ -60,7 +81,7 @@ class RolePermissionSeeder extends Seeder
             'edit-blog-categories',
             'delete-blog-categories',
 
-            //site settings
+            // site settings
             'edit-site-settings',
 
             // Users

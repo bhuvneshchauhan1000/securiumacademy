@@ -1,47 +1,84 @@
 <?php
 
-use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\AcademyController;
 use App\Http\Controllers\Admin\AdminSiteSettingController;
 use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\Admin\BlogController;
-use App\Http\Controllers\Admin\UniversityController;
-use App\Http\Controllers\Admin\AcademyController;
 use App\Http\Controllers\Admin\CourseCategoryController;
 use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\JobCategoryController;
+use App\Http\Controllers\Admin\JobTypeController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UniversityController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Academy;
+use App\Models\Blog;
+use App\Models\BlogCategory;
+use App\Models\Course;
+use App\Models\CourseCategory;
+use App\Models\Permission;
+use App\Models\Role;
+use App\Models\University;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
-
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard', [
             'stats' => [
-                'users' => \App\Models\User::count(),
-                'roles' => \App\Models\Role::count(),
-                'permissions' => \App\Models\Permission::count(),
-                'blogs' => \App\Models\Blog::count(),
-                'blogCategories' => \App\Models\BlogCategory::count(),
-                'universities' => \App\Models\University::count(),
-                'academies' => \App\Models\Academy::count(),
-                'courseCategories' => \App\Models\CourseCategory::count(),
-                'courses' =>   \App\Models\Course::count(),
+                'users' => User::count(),
+                'roles' => Role::count(),
+                'permissions' => Permission::count(),
+                'blogs' => Blog::count(),
+                'blogCategories' => BlogCategory::count(),
+                'universities' => University::count(),
+                'academies' => Academy::count(),
+                'courseCategories' => CourseCategory::count(),
+                'courses' => Course::count(),
             ],
         ]);
     })->name('dashboard');
 
-    // Route::get('/courses', function () {
+    // Route::get('/job-types', function () {
     //     return view('admin.index', [
-    //         'title' => 'Courses',
-    //         'description' => 'Manage Course from here.',
+    //         'title' => 'Job Types',
+    //         'description' => 'Manage Job Type from here.',
     //     ]);
-    // })->middleware('can:view-courses')->name('courses.index');
+    // })->middleware('can:view-job-types')->name('job-types.index');
+
+    Route::controller(JobCategoryController::class)->prefix('job-categories')->name('job-categories.')->group(function () {
+        Route::get('/', 'index')->name('index');
+
+        Route::get('/create', 'create')->name('create');
+
+        Route::post('/', 'store')->name('store');
+
+        Route::get('/{jobCategory}/edit', 'edit')->name('edit');
+
+        Route::put('/{jobCategory}', 'update')->name('update');
+
+        Route::delete('/{jobCategory}', 'destroy')->name('destroy');
+    });
+
+    Route::controller(JobTypeController::class)->prefix('job-types')->name('job-types.')->group(function () {
+        Route::get('/', 'index')->name('index');
+
+        Route::get('/create', 'create')->name('create');
+
+        Route::post('/', 'store')->name('store');
+
+        Route::get('/{jobType}/edit', 'edit')->name('edit');
+
+        Route::put('/{jobType}', 'update')->name('update');
+
+        Route::delete('/{jobType}', 'destroy')->name('destroy');
+    });
 
     Route::controller(CourseController::class)->prefix('courses')->name('courses.')->group(function () {
         Route::get('/', 'index')->name('index');
@@ -56,7 +93,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::delete('/{course}', 'destroy')->name('destroy');
     });
-
 
     Route::controller(CourseCategoryController::class)->prefix('course-categories')->name('course-categories.')->group(function () {
         Route::get('/', 'index')->name('index');
@@ -86,7 +122,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::delete('/{academy}', 'destroy')->name('destroy');
     });
-
 
     Route::get('/universities', [UniversityController::class, 'index'])->name('universities.index');
     Route::get('/universities/create', [UniversityController::class, 'create'])->name('universities.create');
@@ -165,4 +200,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

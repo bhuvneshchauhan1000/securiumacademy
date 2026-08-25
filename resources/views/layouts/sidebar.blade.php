@@ -32,6 +32,38 @@
             </x-sidebar-link>
         @endcan
 
+        @canany(['view-job-types','view-job-categories'])
+        <x-sidebar-section label="{{ __('Job Management') }}" />
+        @endcan
+
+        @can('view-job-types')
+            <x-sidebar-link :href="route('job-types.index')" :active="request()->routeIs('job-types.*')">
+
+                <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2m-9 0h10a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3Zm-4 5h18m-10 0v2m2-2v2">
+                    </path>
+                </svg>
+
+                {{ __('Job Types') }}
+            </x-sidebar-link>
+        @endcan
+
+        @can('view-job-categories')
+            <x-sidebar-link :href="route('job-categories.index')" :active="request()->routeIs('job-categories.*')">
+
+                <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M7 7h.01M7 3h5a1.99 1.99 0 0 1 1.414.586l7 7a2 2 0 0 1 0 2.828l-7 7a2 2 0 0 1-2.828 0l-7-7A1.99 1.99 0 0 1 3 12V7a4 4 0 0 1 4-4z">
+                    </path>
+                </svg>
+
+                {{ __('Job Categories') }}
+            </x-sidebar-link>
+        @endcan
+
         @canany(['view-universities', 'view-academies', 'view-course-categories','view-courses'])
             <x-sidebar-section label="{{ __('University Management') }}" />
         @endcanany

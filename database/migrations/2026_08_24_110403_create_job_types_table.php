@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('course_categories', function (Blueprint $table) {
+        Schema::create('job_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('description')->nullable();
-            $table->string('logo')->nullable();
-            $table->enum('status', ['active','inactive'])->default('active');
+            $table->enum('status', ['draft','published'])->default('draft');
             $table->timestamps();
-            $table->index(['name','status'],'course_category_search_index');
+            $table->index('name', 'job_types_name_index');
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('course_categories');
+        Schema::dropIfExists('job_types');
     }
 };

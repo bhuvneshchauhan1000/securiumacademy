@@ -2,9 +2,10 @@
 
 namespace App\Services;
 
-use App\Events\CourseCreated;
-use App\Events\CourseUpdated;
+use App\Models\User;
 use App\Models\Course;
+use App\Jobs\ProcessCourseCreated;
+use App\Jobs\ProcessCourseUpdated;
 use App\Repositories\Contracts\CourseRepositoryInterface;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -102,11 +103,11 @@ class CourseService
 
         /*
         |--------------------------------------------------------------------------
-        | Fire Event
+        | Dispatch Job directly (no events / listeners)
         |--------------------------------------------------------------------------
         */
 
-        event(new CourseCreated($course));
+        $this->notifyNonAdminUsers($course, ProcessCourseCreated::class);
 
         return $course;
     }
@@ -145,7 +146,13 @@ class CourseService
 
         $course = $this->repository->update($course, $data);
 
-        event(new CourseUpdated($course));
+        /*
+        |--------------------------------------------------------------------------
+        | Dispatch Job directly (no events / listeners)
+        |--------------------------------------------------------------------------
+        */
+
+        $this->notifyNonAdminUsers($course, ProcessCourseUpdated::class);
 
         return $course;
     }
@@ -156,5 +163,22 @@ class CourseService
     public function delete(Course $course): bool
     {
         return $this->repository->delete($course);
+    }
+
+    /**
+     * Dispatch the given notification job for every non-admin user.
+     *
+     * The emails are queued, so they are processed by the queue worker
+     * without slowing down the request.
+     */
+    protected function notifyNonAdminUsers(Course $course, string $jobClass): void
+    {
+        $users = User::whereDoesntHave('roles', function ($query) {
+            $query->where('name', 'admin');
+        })->get();
+
+        foreach ($users as $user) {
+            $jobClass::dispatch($course, $user);
+        }
     }
 }

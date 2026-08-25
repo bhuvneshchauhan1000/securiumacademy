@@ -244,6 +244,22 @@
                 {{ __('Site Settings') }}
             </x-sidebar-link>
         @endcan
+        
+        <x-sidebar-section label="{{ __('Webiste') }}" />
+
+        <x-sidebar-link :href="route('home')" :active="request()->routeIs('home')">
+            <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 21a9 9 0 100-18 9 9 0 000 18z
+                    M3 12h18
+                    M12 3c2.5 2.4 4 5.5 4 9s-1.5 6.6-4 9
+                    M12 3c-2.5 2.4-4 5.5-4 9s1.5 6.6 4 9" />
+            </svg>
+            {{ __('View') }}
+        </x-sidebar-link>
+
+
 
         <x-sidebar-section label="{{ __('Account') }}" />
 

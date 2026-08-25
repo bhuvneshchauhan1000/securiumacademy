@@ -25,6 +25,12 @@ class RolePermissionSeeder extends Seeder
             // Dashboard
             'view-dashboard',
 
+            //job posts
+            'view-job-posts',
+            'create-job-posts',
+            'edit-job-posts',
+            'delete-job-posts',
+
             // job categoried
             'view-job-categories',
             'create-job-categories',

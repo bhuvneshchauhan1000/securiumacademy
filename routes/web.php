@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CourseCategoryController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\JobCategoryController;
+use App\Http\Controllers\Admin\JobPostController;
 use App\Http\Controllers\Admin\JobTypeController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
@@ -45,12 +46,26 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ]);
     })->name('dashboard');
 
-    // Route::get('/job-types', function () {
+    // Route::get('/job-posts', function () {
     //     return view('admin.index', [
-    //         'title' => 'Job Types',
-    //         'description' => 'Manage Job Type from here.',
+    //         'title' => 'Job Posts',
+    //         'description' => 'Manage Job Posts from here.',
     //     ]);
-    // })->middleware('can:view-job-types')->name('job-types.index');
+    // })->middleware('can:view-job-posts')->name('job-posts.index');
+
+    Route::controller(JobPostController::class)->prefix('job-posts')->name('job-posts.')->group(function () {
+        Route::get('/', 'index')->name('index');
+
+        Route::get('/create', 'create')->name('create');
+
+        Route::post('/', 'store')->name('store');
+
+        Route::get('/{jobPost}/edit', 'edit')->name('edit');
+
+        Route::put('/{jobPost}', 'update')->name('update');
+
+        Route::delete('/{jobPost}', 'destroy')->name('destroy');
+    });
 
     Route::controller(JobCategoryController::class)->prefix('job-categories')->name('job-categories.')->group(function () {
         Route::get('/', 'index')->name('index');

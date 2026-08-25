@@ -32,7 +32,7 @@
             </x-sidebar-link>
         @endcan
 
-        @canany(['view-job-types','view-job-categories'])
+        @canany(['view-job-types','view-job-categories','view-job-posts'])
         <x-sidebar-section label="{{ __('Job Management') }}" />
         @endcan
 
@@ -61,6 +61,20 @@
                 </svg>
 
                 {{ __('Job Categories') }}
+            </x-sidebar-link>
+        @endcan
+
+        @can('view-job-posts')
+            <x-sidebar-link :href="route('job-posts.index')" :active="request()->routeIs('job-posts.*')">
+
+                <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 6V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1m-9 4h14m-14 0a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2m-14 0V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2">
+                    </path>
+                </svg>
+
+                {{ __('Job Posts') }}
             </x-sidebar-link>
         @endcan
 

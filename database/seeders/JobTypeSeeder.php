@@ -13,8 +13,7 @@ class JobTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        //
-
+        
         $jobTypes = [
             [
                 "name" => "Intership",
@@ -29,6 +28,31 @@ class JobTypeSeeder extends Seeder
             [
                 "name" => "Part Time",
                 "description" => "Part Time",
+                "status" => "published",
+            ],
+            [
+                "name" => "Contract",
+                "description" => "Contract",
+                "status" => "published",
+            ],
+            [
+                "name" => "Temporary",
+                "description" => "Temporary",
+                "status" => "published",
+            ],
+            [
+                "name" => "Freelance",
+                "description" => "Freelance",
+                "status" => "published",
+            ],
+            [
+                "name" => "Volunteer",
+                "description" => "Volunteer",
+                "status" => "published",
+            ],
+            [
+                "name" => "Apprenticeship",
+                "description" => "Apprenticeship",
                 "status" => "published",
             ],
         ];

@@ -4,13 +4,18 @@ namespace App\Providers;
 
 use App\Events\BlogCreated;
 use App\Events\BlogUpdated;
+use App\Events\JobPostCreated;
+use App\Events\JobPostUpdated;
 use App\Listeners\SendBlogCreatedNotification;
 use App\Listeners\SendBlogUpdatedNotification;
+use App\Listeners\SendJobPostCreatedNotification;
+use App\Listeners\SendJobPostUpdatedNotification;
 use App\Models\Academy;
 use App\Models\Blog;
 use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\JobCategory;
+use App\Models\JobPost;
 use App\Models\JobType;
 use App\Models\University;
 use App\Observers\AcademyObserver;
@@ -18,6 +23,7 @@ use App\Observers\BlogObserver;
 use App\Observers\CourseCategoryObserver;
 use App\Observers\CourseObserver;
 use App\Observers\JobCategoryObserver;
+use App\Observers\JobPostObserver;
 use App\Observers\JobTypeObserver;
 use App\Observers\UniversityObserver;
 use App\Policies\AcademyPolicy;
@@ -25,6 +31,7 @@ use App\Policies\BlogPolicy;
 use App\Policies\CourseCategoryPolicy;
 use App\Policies\CoursePolicy;
 use App\Policies\JobCategoryPolicy;
+use App\Policies\JobPostPolicy;
 use App\Policies\JobTypePolicy;
 use App\Policies\UniversityPolicy;
 use App\Repositories\AcademyRepository;
@@ -34,11 +41,13 @@ use App\Repositories\Contracts\BlogRepositoryInterface;
 use App\Repositories\Contracts\CourseCategoryRepositoryInterface;
 use App\Repositories\Contracts\CourseRepositoryInterface;
 use App\Repositories\Contracts\JobCategoryRepositoryInterface;
+use App\Repositories\Contracts\JobPostRepositoryInterface;
 use App\Repositories\Contracts\JobTypeRepositoryInterface;
 use App\Repositories\Contracts\UniversityRepositoryInterface;
 use App\Repositories\CourseCategoryRepository;
 use App\Repositories\CourseRepository;
 use App\Repositories\JobCategoryRepository;
+use App\Repositories\JobPostRepository;
 use App\Repositories\JobTypeRepository;
 use App\Repositories\UniversityRepository;
 use Illuminate\Support\Facades\Event;
@@ -69,6 +78,14 @@ class AppServiceProvider extends ServiceProvider
             BlogUpdated::class,
             SendBlogUpdatedNotification::class
         );
+        Event::listen(
+            JobPostCreated::class,
+            SendJobPostCreatedNotification::class
+        );
+        Event::listen(
+            JobPostUpdated::class,
+            SendJobPostUpdatedNotification::class
+        );
 
         // Course notifications dispatch their Jobs directly from
         // CourseService (no events / listeners).
@@ -79,6 +96,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CourseRepositoryInterface::class, CourseRepository::class);
         $this->app->bind(JobTypeRepositoryInterface::class, JobTypeRepository::class);
         $this->app->bind(JobCategoryRepositoryInterface::class, JobCategoryRepository::class);
+        $this->app->bind(JobPostRepositoryInterface::class, JobPostRepository::class);
 
         Gate::policy(Blog::class, BlogPolicy::class);
         Gate::policy(University::class, UniversityPolicy::class);
@@ -87,6 +105,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(Course::class, CoursePolicy::class);
         Gate::policy(JobType::class, JobTypePolicy::class);
         Gate::policy(JobCategory::class, JobCategoryPolicy::class);
+        Gate::policy(JobPost::class, JobPostPolicy::class);
 
         Blog::observe(BlogObserver::class);
         University::observe(UniversityObserver::class);
@@ -95,5 +114,6 @@ class AppServiceProvider extends ServiceProvider
         Course::observe(CourseObserver::class);
         JobType::observe(JobTypeObserver::class);
         JobCategory::observe(JobCategoryObserver::class);
+        JobPost::observe(JobPostObserver::class);
     }
 }

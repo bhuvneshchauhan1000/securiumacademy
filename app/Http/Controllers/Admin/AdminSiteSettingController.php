@@ -27,6 +27,8 @@ class AdminSiteSettingController extends Controller
         'linkedin_url',
         'meta_title_default',
         'meta_description_default',
+        'meta_keyword_default',
+        'meta_script_default',
         'pay_now_usd_url',
         'pay_now_inr_url',
     ];

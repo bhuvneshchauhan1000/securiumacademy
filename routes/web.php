@@ -26,6 +26,9 @@ use App\Models\University;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
+// Route::get('/', function () {
+//     return view('home');
+// })->name('home');
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
@@ -212,6 +215,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->middleware('can:edit-permissions')->name('permissions.update');
     Route::delete('/permissions/{permission}', [PermissionController::class, 'destroy'])
         ->middleware('can:delete-permissions')->name('permissions.destroy');
+
     Route::get('site-settings', [AdminSiteSettingController::class, 'edit'])
         ->middleware('can:edit-site-settings')->name('site-settings.edit');
     Route::put('site-settings', [AdminSiteSettingController::class, 'update'])

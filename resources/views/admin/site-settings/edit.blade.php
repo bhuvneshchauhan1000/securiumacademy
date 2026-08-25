@@ -56,7 +56,7 @@
                             'SEO' => [
                                 'icon' => 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z',
                                 'color' => 'bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-300',
-                                'fields' => ['meta_title_default', 'meta_description_default'],
+                                'fields' => ['meta_title_default', 'meta_description_default','meta_keyword_default','meta_script_default'],
                             ],
                             'Payments' => [
                                 'icon' => 'M3 10h18M7 15h3m-6-8h14a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2z',

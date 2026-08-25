@@ -5,8 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        @if ($site_name = \App\Models\SiteSetting::get('site_name'))
+            <meta name="title" content="{{ $site_name }}">
+        @else
+            <title>{{ config('app.name', 'Laravel') }}</title>
+        @endif
 
+        
         @if ($favicon = \App\Models\SiteSetting::get('site_favicon'))
             <link rel="icon" href="{{ asset($favicon) }}" type="image/x-icon" />
         @endif

@@ -188,6 +188,23 @@
             </x-sidebar-link>
         @endcan
 
+        @canany(['view-testimonials'])
+            <x-sidebar-section label="{{ __('Testimonials Management') }}" />
+        @endcanany
+
+        @can('view-testimonials')
+            <x-sidebar-link :href="route('testimonials.index')" :active="request()->routeIs('testimonials.*')">
+                <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M7 8h10M7 12h6m-9 8l3-3h10a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v9a2 2 0 002 2h1v3z">
+                    </path>
+                </svg>
+                {{ __('Testimonials') }}
+            </x-sidebar-link>
+        @endcan
+
+
         @canany(['view-users', 'view-roles', 'view-permissions'])
             <x-sidebar-section label="{{ __('User Management') }}" />
         @endcanany

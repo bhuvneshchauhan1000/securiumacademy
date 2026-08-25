@@ -18,6 +18,7 @@ use App\Models\JobCategory;
 use App\Models\JobPost;
 use App\Models\JobType;
 use App\Models\University;
+use App\Models\Testimonial;
 use App\Observers\AcademyObserver;
 use App\Observers\BlogObserver;
 use App\Observers\CourseCategoryObserver;
@@ -34,6 +35,7 @@ use App\Policies\JobCategoryPolicy;
 use App\Policies\JobPostPolicy;
 use App\Policies\JobTypePolicy;
 use App\Policies\UniversityPolicy;
+use App\Policies\TestimonialPolicy;
 use App\Repositories\AcademyRepository;
 use App\Repositories\BlogRepository;
 use App\Repositories\Contracts\AcademyRepositoryInterface;
@@ -43,12 +45,14 @@ use App\Repositories\Contracts\CourseRepositoryInterface;
 use App\Repositories\Contracts\JobCategoryRepositoryInterface;
 use App\Repositories\Contracts\JobPostRepositoryInterface;
 use App\Repositories\Contracts\JobTypeRepositoryInterface;
+use App\Repositories\Contracts\TestimonialRepositoryInterface;
 use App\Repositories\Contracts\UniversityRepositoryInterface;
 use App\Repositories\CourseCategoryRepository;
 use App\Repositories\CourseRepository;
 use App\Repositories\JobCategoryRepository;
 use App\Repositories\JobPostRepository;
 use App\Repositories\JobTypeRepository;
+use App\Repositories\TestimonialRepository;
 use App\Repositories\UniversityRepository;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
@@ -97,6 +101,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(JobTypeRepositoryInterface::class, JobTypeRepository::class);
         $this->app->bind(JobCategoryRepositoryInterface::class, JobCategoryRepository::class);
         $this->app->bind(JobPostRepositoryInterface::class, JobPostRepository::class);
+        $this->app->bind(TestimonialRepositoryInterface::class, TestimonialRepository::class);
 
         Gate::policy(Blog::class, BlogPolicy::class);
         Gate::policy(University::class, UniversityPolicy::class);
@@ -106,6 +111,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(JobType::class, JobTypePolicy::class);
         Gate::policy(JobCategory::class, JobCategoryPolicy::class);
         Gate::policy(JobPost::class, JobPostPolicy::class);
+        Gate::policy(Testimonial::class,TestimonialPolicy::class);
 
         Blog::observe(BlogObserver::class);
         University::observe(UniversityObserver::class);

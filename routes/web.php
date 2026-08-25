@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\JobPostController;
 use App\Http\Controllers\Admin\JobTypeController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\UniversityController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
@@ -46,12 +47,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ]);
     })->name('dashboard');
 
-    // Route::get('/job-posts', function () {
+    // Route::get('/testimonials', function () {
     //     return view('admin.index', [
-    //         'title' => 'Job Posts',
-    //         'description' => 'Manage Job Posts from here.',
+    //         'title' => 'Testimonial',
+    //         'description' => 'Manage Testimonial from here.',
     //     ]);
-    // })->middleware('can:view-job-posts')->name('job-posts.index');
+    // })->middleware('can:view-testimonials')->name('testimonials.index');
+    Route::controller(TestimonialController::class)->prefix('testimonials')->name('testimonials.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{testimonial}/edit', 'edit')->name('edit');
+        Route::put('/{testimonial}', 'update')->name('update');
+        Route::delete('/{testimonial}', 'destroy')->name('destroy');
+    });
 
     Route::controller(JobPostController::class)->prefix('job-posts')->name('job-posts.')->group(function () {
         Route::get('/', 'index')->name('index');

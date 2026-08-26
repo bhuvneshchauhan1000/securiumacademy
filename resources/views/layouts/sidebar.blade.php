@@ -204,6 +204,22 @@
             </x-sidebar-link>
         @endcan
 
+        @canany(['view-partners'])
+            <x-sidebar-section label="{{ __('Partners Management') }}" />
+        @endcanany
+
+        @can('view-partners')
+            <x-sidebar-link :href="route('partners.index')" :active="request()->routeIs('partners.*')">
+                <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 11a4 4 0 10-8 0m8 0a4 4 0 01-8 0m8 0h3a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2h3m8-5a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+
+                {{ __('Partners') }}
+            </x-sidebar-link>
+        @endcan
+
 
         @canany(['view-users', 'view-roles', 'view-permissions'])
             <x-sidebar-section label="{{ __('User Management') }}" />

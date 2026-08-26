@@ -25,6 +25,13 @@ class RolePermissionSeeder extends Seeder
             // Dashboard
             'view-dashboard',
 
+            //partners
+
+            'view-partners',
+            'create-partners',
+            'edit-partners',
+            'delete-partners',
+
             //testimonials
 
             'view-testimonials',

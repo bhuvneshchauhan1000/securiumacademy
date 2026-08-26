@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\UniversityController;
+use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Academy;
@@ -26,12 +27,12 @@ use App\Models\University;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('home');
-// })->name('home');
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 })->name('home');
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
@@ -50,12 +51,22 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ]);
     })->name('dashboard');
 
-    // Route::get('/testimonials', function () {
+    // Route::get('/partners', function () {
     //     return view('admin.index', [
-    //         'title' => 'Testimonial',
-    //         'description' => 'Manage Testimonial from here.',
+    //         'title' => 'Partners',
+    //         'description' => 'Manage Partners from here.',
     //     ]);
-    // })->middleware('can:view-testimonials')->name('testimonials.index');
+    // })->middleware('can:view-partners')->name('partners.index');
+
+    Route::controller(PartnerController::class)->prefix('partners')->name('partners.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{partner}/edit', 'edit')->name('edit');
+        Route::put('/{partner}', 'update')->name('update');
+        Route::delete('/{partner}', 'destroy')->name('destroy');
+    });
+
     Route::controller(TestimonialController::class)->prefix('testimonials')->name('testimonials.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
@@ -67,102 +78,76 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::controller(JobPostController::class)->prefix('job-posts')->name('job-posts.')->group(function () {
         Route::get('/', 'index')->name('index');
-
         Route::get('/create', 'create')->name('create');
-
         Route::post('/', 'store')->name('store');
-
         Route::get('/{jobPost}/edit', 'edit')->name('edit');
-
         Route::put('/{jobPost}', 'update')->name('update');
-
         Route::delete('/{jobPost}', 'destroy')->name('destroy');
     });
 
     Route::controller(JobCategoryController::class)->prefix('job-categories')->name('job-categories.')->group(function () {
         Route::get('/', 'index')->name('index');
-
         Route::get('/create', 'create')->name('create');
-
         Route::post('/', 'store')->name('store');
-
         Route::get('/{jobCategory}/edit', 'edit')->name('edit');
-
         Route::put('/{jobCategory}', 'update')->name('update');
-
         Route::delete('/{jobCategory}', 'destroy')->name('destroy');
     });
 
     Route::controller(JobTypeController::class)->prefix('job-types')->name('job-types.')->group(function () {
         Route::get('/', 'index')->name('index');
-
         Route::get('/create', 'create')->name('create');
-
         Route::post('/', 'store')->name('store');
-
         Route::get('/{jobType}/edit', 'edit')->name('edit');
-
         Route::put('/{jobType}', 'update')->name('update');
-
         Route::delete('/{jobType}', 'destroy')->name('destroy');
     });
 
     Route::controller(CourseController::class)->prefix('courses')->name('courses.')->group(function () {
         Route::get('/', 'index')->name('index');
-
         Route::get('/create', 'create')->name('create');
-
         Route::post('/', 'store')->name('store');
-
         Route::get('/{course}/edit', 'edit')->name('edit');
-
         Route::put('/{course}', 'update')->name('update');
-
         Route::delete('/{course}', 'destroy')->name('destroy');
     });
 
     Route::controller(CourseCategoryController::class)->prefix('course-categories')->name('course-categories.')->group(function () {
         Route::get('/', 'index')->name('index');
-
         Route::get('/create', 'create')->name('create');
-
         Route::post('/', 'store')->name('store');
-
         Route::get('/{courseCategory}/edit', 'edit')->name('edit');
-
         Route::put('/{courseCategory}', 'update')->name('update');
-
         Route::delete('/{courseCategory}', 'destroy')->name('destroy');
     });
 
     Route::controller(AcademyController::class)->prefix('academies')->name('academies.')->group(function () {
-
         Route::get('/', 'index')->name('index');
-
         Route::get('/create', 'create')->name('create');
-
         Route::post('/', 'store')->name('store');
-
         Route::get('/{academy}/edit', 'edit')->name('edit');
-
         Route::put('/{academy}', 'update')->name('update');
-
         Route::delete('/{academy}', 'destroy')->name('destroy');
     });
 
-    Route::get('/universities', [UniversityController::class, 'index'])->name('universities.index');
-    Route::get('/universities/create', [UniversityController::class, 'create'])->name('universities.create');
-    Route::post('/universities', [UniversityController::class, 'store'])->name('universities.store');
-    Route::get('/universities/{university}/edit', [UniversityController::class, 'edit'])->name('universities.edit');
-    Route::put('/universities/{university}', [UniversityController::class, 'update'])->name('universities.update');
-    Route::delete('/universities/{university}', [UniversityController::class, 'destroy'])->name('universities.destroy');
+    Route::controller(UniversityController::class)->prefix('universities')->name('universities.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{university}/edit', 'edit')->name('edit');
+        Route::put('/{university}', 'update')->name('update');
+        Route::delete('/{university}', 'destroy')->name('destroy');
+    });
+    
 
-    Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
-    Route::get('/blogs/create', [BlogController::class, 'create'])->name('blogs.create');
-    Route::post('/blogs', [BlogController::class, 'store'])->name('blogs.store');
-    Route::get('/blogs/{blog}/edit', [BlogController::class, 'edit'])->name('blogs.edit');
-    Route::put('/blogs/{blog}', [BlogController::class, 'update'])->name('blogs.update');
-    Route::delete('/blogs/{blog}', [BlogController::class, 'destroy'])->name('blogs.destroy');
+    Route::controller(BlogController::class)->prefix('blogs')->name('blogs.')->group(function(){
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{blog}/edit', 'edit')->name('edit');
+        Route::put('/{blog}', 'update')->name('update');
+        Route::delete('/{blog}', 'destroy')->name('destroy');
+    });
 
     Route::get('/blog-categories', [BlogCategoryController::class, 'index'])
         ->middleware('can:view-blog-categories')->name('blog-categories.index');

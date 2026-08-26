@@ -150,7 +150,7 @@
 
 <body>
 
-    @include('partials.site-header')
+    @include('site.site-header')
 
     <main>
         @if (session('enquiry_success'))
@@ -165,11 +165,11 @@
         @yield('content')
     </main>
 
-    @include('partials.site-footer')
+    @include('site.site-footer')
 
-    @include('partials.enquiry-modal')
+    <!-- @include('partials.enquiry-modal')
 
-    @include('partials.sticky-form')
+    @include('partials.sticky-form') -->
 
     {{-- Bootstrap --}}
     <script

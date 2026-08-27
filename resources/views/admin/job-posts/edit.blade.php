@@ -85,7 +85,7 @@
                 {{-- Form --}}
                 <form
                     method="POST"
-                    action="{{ route('job-posts.update', $jobPost) }}"
+                    action="{{ route('job-posts.update', \App\Support\HashId::encode($jobPost->id)) }}"
                     enctype="multipart/form-data"
                     class="p-6 sm:p-8"
                 >

@@ -1174,9 +1174,11 @@
       <div class="marquee">
                 <div class="marquee__content">
           @for ($i = 0; $i < 2; $i++)
-            @foreach (config('site.partners') as $partner)
+            @foreach (\App\Models\Partner::all() as $partner)
             <div class="marquee__item">
-              <img src="assets/images/{{ $partner }}" alt="Partner Logo" loading="lazy">
+              @if ($partner->logo)
+                <img src="{{ Storage::url($partner->logo) }}" alt="{{ $partner->name }}" loading="lazy">
+              @endif
             </div>
             @endforeach
           @endfor
@@ -1294,31 +1296,27 @@
   </style>
 
 
-<!-- latest Blog Section -->
+  <!-- latest Blog Section -->
   <section class="latest-blog-section py-5">
     <div class="container">
       <h2 class="text-center mb-4 text-gradient">Latest Blogs</h2>
       <p class="text-center mb-5" style="color:#aaa;">Stay updated with the latest trends and insights in cybersecurity.</p>
 
-      <div id="blogCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div id="blogCarousel" class="carousel slide multi-item-carousel" data-bs-ride="carousel" data-bs-interval="3000">
         <div class="carousel-inner">
 
           @foreach ($blogs as $index => $blog)
           <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-            <div class="row justify-content-center">
-              <div class="col-md-6 col-lg-4">
-                <div class="blog-card">
-                  <div class="blog-img-wrapper">
-                    @if ($blog->featured_image_url)
-                    <img src="{{ $blog->featured_image_url }}" alt="{{ $blog->title }}">
-                    @endif
-                  </div>
-                  <div class="card-body">
-                    <h5 class="card-title">{{ $blog->title }}</h5>
-                    <p class="card-text">{{ Str::limit($blog->short_description, 100) }}</p>
-                    <a href="{{ url('blog/' . $blog->slug) }}" class="btn btn-glow">Read More</a>
-                  </div>
-                </div>
+            <div class="blog-card mx-2">
+              <div class="blog-img-wrapper">
+                @if ($blog->featured_image_url)
+                <img src="{{ $blog->featured_image_url }}" alt="{{ $blog->title }}">
+                @endif
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">{{ $blog->title }}</h5>
+                <p class="card-text">{{ Str::limit($blog->short_description, 100) }}</p>
+                <a href="{{ url('blog/' . $blog->slug) }}" class="btn btn-glow">Read More</a>
               </div>
             </div>
           </div>
@@ -1350,31 +1348,25 @@
       <h2 class="text-center mb-4 text-gradient">What Our Students Say</h2>
       <p class="text-center mb-5" style="color:#aaa;">Real feedback from professionals who trained with us.</p>
 
-      <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div id="testimonialCarousel" class="carousel slide multi-item-carousel" data-bs-ride="carousel" data-bs-interval="4000">
         <div class="carousel-inner">
-          @foreach ($testimonials->chunk(3) as $chunkIndex => $chunk)
-          <div class="carousel-item {{ $chunkIndex === 0 ? 'active' : '' }}">
-            <div class="row g-4 justify-content-center">
-              @foreach ($chunk as $testimonial)
-              <div class="col-md-4">
-                <div class="testimonial-card h-100">
-                  <div class="stars">
-                    @for ($i = 1; $i <= 5; $i++)
-                    <i class="fas fa-star {{ $i <= $testimonial->rating ? 'text-warning' : 'text-muted' }}"></i>
-                    @endfor
-                  </div>
-                  <p class="testimonial-text mt-3 mb-3">{{ $testimonial->content }}</p>
-                  <div class="testimonial-author">
-                    <strong>{{ $testimonial->name }}</strong>
-                    @if ($testimonial->designation || $testimonial->company)
-                    <small style="color:#8fa5b3; display:block;">
-                      {{ $testimonial->designation }}@if ($testimonial->company) &middot; {{ $testimonial->company }}@endif
-                    </small>
-                    @endif
-                  </div>
-                </div>
+          @foreach ($testimonials as $index => $testimonial)
+          <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+            <div class="testimonial-card mx-2 h-100">
+              <div class="stars">
+                @for ($i = 1; $i <= 5; $i++)
+                <i class="fas fa-star {{ $i <= $testimonial->rating ? 'text-warning' : 'text-muted' }}"></i>
+                @endfor
               </div>
-              @endforeach
+              <p class="testimonial-text mt-3 mb-3">{{ $testimonial->content }}</p>
+              <div class="testimonial-author">
+                <strong>{{ $testimonial->name }}</strong>
+                @if ($testimonial->designation || $testimonial->company)
+                <small style="color:#8fa5b3; display:block;">
+                  {{ $testimonial->designation }}@if ($testimonial->company) &middot; {{ $testimonial->company }}@endif
+                </small>
+                @endif
+              </div>
             </div>
           </div>
           @endforeach
@@ -1407,6 +1399,36 @@
   </section>
   @endif
 
+
+  {{-- Multi-Item Carousel: shows 3 at a time, scrolls 1 at a time --}}
+  <style>
+    .multi-item-carousel .carousel-inner {
+      display: flex;
+      overflow: hidden;
+    }
+    .multi-item-carousel .carousel-item {
+      display: flex;
+      flex: 0 0 33.3333%;
+      transition: transform 0.6s ease-in-out;
+    }
+    .multi-item-carousel .carousel-item.active {
+      display: flex;
+    }
+    .multi-item-carousel .carousel-item-next,
+    .multi-item-carousel .carousel-item-prev {
+      display: flex;
+    }
+    @media (max-width: 991px) {
+      .multi-item-carousel .carousel-item {
+        flex: 0 0 50%;
+      }
+    }
+    @media (max-width: 575px) {
+      .multi-item-carousel .carousel-item {
+        flex: 0 0 100%;
+      }
+    }
+  </style>
 
 
 

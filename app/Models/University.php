@@ -27,4 +27,9 @@ class University extends Model
     {
         return $this->hasMany(Course::class);
     }
+
+    public function programs()
+    {
+        return $this->courses();
+    }
 }

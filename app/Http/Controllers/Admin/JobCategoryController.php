@@ -81,7 +81,7 @@ class JobCategoryController extends Controller
     public function edit(JobCategory $jobCategory)
     {
         //
-        $this->authorize('edit', JobCategory::class);
+        $this->authorize('edit', $jobCategory);
 
         return view('admin.job-categories.edit', compact('jobCategory'));
     }

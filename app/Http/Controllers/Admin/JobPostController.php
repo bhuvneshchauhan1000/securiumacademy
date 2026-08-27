@@ -100,7 +100,7 @@ class JobPostController extends Controller
     public function edit(JobPost $jobPost)
     {
         //
-        $this->authorize('edit', JobPost::class);
+        $this->authorize('edit', $jobPost);
 
         $jobTypes = JobType::orderBy('name')->get();
         $jobCategories = JobCategory::orderBy('name')->get();

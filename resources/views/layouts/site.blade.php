@@ -21,6 +21,27 @@
             : asset('favicon.ico'),
 
         'url' => route('home'),
+
+        'address' => [
+            'india' => $settings['address_india'] ?? '',
+            'dubai' => $settings['address_dubai'] ?? '',
+            'us'    => $settings['address_us'] ?? '',
+        ],
+
+        'contact' => [
+            'phone'      => $settings['contact_phone'] ?? '',
+            'phone_link' => $settings['contact_phone_link'] ?? '',
+            'email'      => $settings['contact_email'] ?? '',
+            'whatsapp'   => $settings['whatsapp_url'] ?? '',
+        ],
+
+        'social' => [
+            'facebook'  => $settings['facebook_url'] ?? '#',
+            'twitter'   => $settings['twitter_url'] ?? '#',
+            'instagram' => $settings['instagram_url'] ?? '#',
+            'youtube'   => $settings['youtube_url'] ?? '#',
+            'linkedin'  => $settings['linkedin_url'] ?? '#',
+        ],
     ];
 @endphp
 
@@ -167,9 +188,9 @@
 
     @include('site.site-footer')
 
-    <!-- @include('partials.enquiry-modal')
+    {{-- @include('partials.enquiry-modal')
 
-    @include('partials.sticky-form') -->
+    @include('partials.sticky-form') --}}
 
     {{-- Bootstrap --}}
     <script

@@ -79,7 +79,7 @@ class JobTypeController extends Controller
     public function edit(JobType $jobType)
     {
         //
-        $this->authorize('edit', JobType::class);
+        $this->authorize('edit', $jobType);
 
         return view('admin.job-types.edit', compact('jobType'));
     }

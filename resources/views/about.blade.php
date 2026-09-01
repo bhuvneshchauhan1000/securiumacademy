@@ -215,9 +215,6 @@
                         <!-- Why Choose Item Start -->
                         <div class="why-choose-item wow fadeInUp" data-wow-delay="0.4s"
                             style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
-                            <div class="icon-box">
-                                <img src="images/icon-why-choose-1.svg" alt="">
-                            </div>
                             <div class="why-choose-item-content">
                                 <h3>expertise and experience</h3>
                                 <p>A team of seasoned cybersecurity professionals with extensive industry knowledge.</p>
@@ -228,9 +225,6 @@
                         <!-- Why Choose Item Start -->
                         <div class="why-choose-item wow fadeInUp" data-wow-delay="0.6s"
                             style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">
-                            <div class="icon-box">
-                                <img src="images/icon-why-choose-2.svg" alt="">
-                            </div>
                             <div class="why-choose-item-content">
                                 <h3>proactive security approach</h3>
                                 <p>Focused on preventing threats before they impact your system, not just reacting after
@@ -242,9 +236,6 @@
                         <!-- Why Choose Item Start -->
                         <div class="why-choose-item wow fadeInUp" data-wow-delay="0.8s"
                             style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInUp;">
-                            <div class="icon-box">
-                                <img src="images/icon-why-choose-3.svg" alt="">
-                            </div>
                             <div class="why-choose-item-content">
                                 <h3>tailored training programs</h3>
                                 <p>Educating your team on security best practices to reduce human error and enhance
@@ -264,7 +255,7 @@
                     <!-- Why Choose Counter Item Start -->
                     <div class="why-choose-counter-item">
                         <div class="icon-box">
-                            <img src="./assets/images/presentation.png" alt="">
+                            <img src="{{ asset('icons/presentation.png') }}" alt="">
                         </div>
                         <div class="why-choose-counter-content">
                             <h3><span class="counter">50</span>+</h3>
@@ -276,7 +267,7 @@
                     <!-- Why Choose Counter Item Start -->
                     <div class="why-choose-counter-item">
                         <div class="icon-box">
-                            <img src="./assets/images/teacher.png" alt="">
+                            <img src="{{ asset('icons/teacher.png') }}" alt="">
                         </div>
                         <div class="why-choose-counter-content">
                             <h3><span class="counter">10</span>+</h3>
@@ -288,7 +279,7 @@
                     <!-- Why Choose Counter Item Start -->
                     <div class="why-choose-counter-item">
                         <div class="icon-box">
-                            <img src="./assets/images/online-course.png" alt="">
+                            <img src="{{ asset('icons/online-course.png') }}" alt="">
                         </div>
                         <div class="why-choose-counter-content">
                             <h3><span class="counter">50</span>+</h3>
@@ -300,7 +291,7 @@
                     <!-- Why Choose Counter Item Start -->
                     <div class="why-choose-counter-item">
                         <div class="icon-box">
-                            <img src="./assets/images/diploma.png" alt="">
+                            <img src="{{ asset('icons/diploma.png') }}" alt="">
                         </div>
                         <div class="why-choose-counter-content">
                             <h3><span class="counter">20</span>+</h3>

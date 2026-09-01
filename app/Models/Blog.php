@@ -36,39 +36,6 @@ class Blog extends Model
         'guide' => 'boolean',
         'press_release' => 'boolean',
     ];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($blog) {
-            $blog->slug = static::generateUniqueSlug($blog->title);
-        });
-
-        static::updating(function ($blog) {
-            if ($blog->isDirty("title")) {
-                $blog->slug = static::generateUniqueSlug($blog->title, $blog->id);
-            }
-        });
-    }
-
-    protected static function generateUniqueSlug(string $title, ?int $ignoreId = null): string
-    {
-        $slug = Str::slug($title);
-        $originalSlug = $slug;
-        $counter = 1;
-
-        while (
-            static::where('slug', $slug)
-                ->when($ignoreId, fn($query) => $query->where('id', '!=', $ignoreId))
-                ->exists()
-        ) {
-            $slug = $originalSlug . '-' . $counter++;
-        }
-
-        return $slug;
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

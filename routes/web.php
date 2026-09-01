@@ -40,6 +40,10 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
+Route::get('blog',function(){
+    return view('blog');
+})->name('blog');
+
 // Route::get('/', function () {
 //     return view('welcome');
 // })->name('home');

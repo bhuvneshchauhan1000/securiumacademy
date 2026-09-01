@@ -155,7 +155,7 @@
 
                 <div class="col-md-6 col-lg-4 d-flex">
 
-                    <a href="{{ url('blog/' . $blog->slug) }}" class="blog-card-wrapper w-100">
+                    <a href="{{ route('blog.detail', ['slug' => $blog->slug]) }}" class="blog-card-wrapper w-100">
 
                         <div class="blog-card">
 

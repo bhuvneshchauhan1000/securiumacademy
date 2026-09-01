@@ -44,6 +44,10 @@ Route::get('blog',function(){
     return view('blog');
 })->name('blog');
 
+Route::get('blog/{slug}',function($slug){
+    return view('blog-detail',compact('slug'));
+})->name('blog.detail');
+
 // Route::get('/', function () {
 //     return view('welcome');
 // })->name('home');

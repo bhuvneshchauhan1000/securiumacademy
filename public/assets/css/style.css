@@ -552,7 +552,7 @@ a.btn.btn-primary.btn-lg.mt-3 {
     top: 50%;
     left: 0;
     transform: translateY(-50%);
-    background: url('{{ asset("icons/icon-sub-heading.svg") }}') no-repeat left center;
+    background: url('/icons/icon-sub-heading.svg') no-repeat left center;
     background-repeat: no-repeat;
     background-position: left center;
     background-size: cover;
@@ -1821,7 +1821,7 @@ a.btn.btn-primary.btn-lg.mt-3 {
 
 .page-header {
     position: relative;
-    background-image: url(page-header-bg.jpg);
+    background-image: url('/images/page-header-bg.jpg');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Support\HasHashIdRouteBinding;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Course extends Model
 {
@@ -33,17 +34,17 @@ class Course extends Model
         'course_category_id',
     ];
 
-    public function courseCategory()
+    public function courseCategory(): BelongsTo
     {
         return $this->belongsTo(CourseCategory::class);
     }
 
-    public function academy()
+    public function academy(): BelongsTo
     {
         return $this->belongsTo(Academy::class);
     }
 
-    public function university()
+    public function university(): BelongsTo
     {
         return $this->belongsTo(University::class);
     }

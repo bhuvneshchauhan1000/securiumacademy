@@ -5,11 +5,25 @@
         </h2>
     </x-slot>
 
-    <div x-data="{ search: '', visibleCount: 0 }" x-init="$watch('search', () => $nextTick(() => {
+    <div x-data="{
+            search: '',
+            page: 1,
+            perPage: 6,
+            visibleCount: 0,
+            get totalPages() {
+                const grid = $root.querySelector('#modules-grid');
+                const total = grid ? grid.querySelectorAll('a').length : 0;
+                return Math.max(1, Math.ceil(total / this.perPage));
+            },
+            gotPage(p) {
+                this.page = Math.min(Math.max(1, p), this.totalPages);
+            },
+        }" x-init="$watch('search', (val) => $nextTick(() => {
             const grid = $root.querySelector('#modules-grid');
             visibleCount = grid
                 ? [...grid.querySelectorAll('a')].filter(a => !a.getAttribute('style')?.includes('display: none')).length
                 : 0;
+            if (val) page = 1;
         }))" class="space-y-6">
         {{-- Welcome banner --}}
         <div
@@ -248,11 +262,13 @@
                     class="rounded-full bg-gray-200 dark:bg-gray-700 px-3 py-1 text-xs font-medium text-gray-600 dark:text-gray-300">{{ __('Quick Access') }}</span>
             </div>
 
+            @php $modIndex = -1; @endphp
             <div id="modules-grid" class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 @can('view-universities')
+                    @php $modIndex++; @endphp
                     <a href="{{ route('universities.index') }}"
                         class="group relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 p-6 shadow-sm ring-1 ring-gray-200 dark:ring-gray-700 transition hover:shadow-md hover:ring-teal-300 dark:hover:ring-teal-700"
-                        x-show="!search || 'university configuration and management'.includes(search.toLowerCase())">
+                        x-show="search ? 'university configuration and management'.includes(search.toLowerCase()) : ({{ $modIndex }} >= (page - 1) * perPage && {{ $modIndex }} < page * perPage)">
                         <div class="absolute inset-x-0 top-0 h-1 bg-teal-500"></div>
                         <div class="flex items-center gap-4">
                             <div

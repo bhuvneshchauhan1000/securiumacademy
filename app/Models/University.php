@@ -4,6 +4,10 @@ namespace App\Models;
 
 use App\Support\HasHashIdRouteBinding;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Builder;
+
+
 
 class University extends Model
 {
@@ -23,13 +27,8 @@ class University extends Model
         'sort_order',
     ];
 
-    public function courses()
+    public function courses(): HasMany
     {
         return $this->hasMany(Course::class);
-    }
-
-    public function programs()
-    {
-        return $this->courses();
     }
 }

@@ -108,7 +108,7 @@ class CourseSeeder extends Seeder
                 'duration' => '5 Days (40 Hours)',
                 'fee' => 48000,
                 'discount_fee' => 29999,
-                'course_level' => 'Advanced',
+                'course_level' => 'advanced',
                 'certification' => 'ISACA CISM',
                 'is_featured' => false,
             ],
@@ -204,7 +204,6 @@ class CourseSeeder extends Seeder
             |--------------------------------------------------------------------------
             |
             | Weighted random: 40% academy, 40% university, 20% standalone.
-            | Falls back to standalone when no academies/universities exist yet.
             |
             */
 

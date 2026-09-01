@@ -26,9 +26,9 @@
         <div class="footer-column">
             <h4>Quick Links</h4>
             <ul>
-                <li><a href="{{ url('/') }}">Home</a></li>
-                <li><a href="{{ url('abouts') }}">About Us</a></li>
-                <li><a href="{{ url('contact') }}">Contact</a></li>
+                <li><a href="{{ route('home') }}">Home</a></li>
+                <li><a href="{{ route('about') }}">About Us</a></li>
+                <li><a href="{{ route('contact') }}">Contact</a></li>
                 <li><a href="{{ url('blog') }}">Blog</a></li>
                 <li><a href="{{ url('career') }}">Career</a></li>
                 <li><a href="{{ url('vapt-intern') }}">vapt internship</a></li>
@@ -330,6 +330,3 @@
         font-size: 13px;
     }
 </style>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.0/build/css/intlTelInput.css">
-<link rel="stylesheet" href="assets/css/lead-form.css">

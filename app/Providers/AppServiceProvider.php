@@ -59,6 +59,7 @@ use App\Repositories\JobTypeRepository;
 use App\Repositories\PartnerRepository;
 use App\Repositories\TestimonialRepository;
 use App\Repositories\UniversityRepository;
+use App\ViewComposers\SiteHeaderComposer;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
@@ -130,70 +131,6 @@ class AppServiceProvider extends ServiceProvider
         JobCategory::observe(JobCategoryObserver::class);
         JobPost::observe(JobPostObserver::class);
         Partner::observe(PartnerObserver::class);
-
-        // Share navigation data with all site views
-        $megaMenu = [
-            [
-                'target' => 'cyber-security',
-                'label' => 'Cyber Security',
-                'category' => 'cyber-security',
-                'logo' => 'ec_council_logo.png',
-                'card_class' => 'ecu-course',
-            ],
-            [
-                'target' => 'data-science',
-                'label' => 'Data Science',
-                'category' => 'data-science',
-                'logo' => 'isc.png',
-                'card_class' => 'isc-course',
-            ],
-            [
-                'target' => 'offensive',
-                'label' => 'Offensive Security',
-                'category' => 'offensive-security',
-                'logo' => 'offsec_logo.jpg',
-                'card_class' => 'offensive-course',
-            ],
-            [
-                'target' => 'comptia',
-                'label' => 'CompTIA',
-                'category' => 'comptia',
-                'logo' => 'comptia.png',
-                'card_class' => 'comptia-course',
-            ],
-            [
-                'target' => 'isaca',
-                'label' => 'ISACA',
-                'category' => 'isaca',
-                'logo' => 'issaca.jpg',
-                'card_class' => 'isaca-course',
-            ],
-            [
-                'target' => 'universities',
-                'label' => 'Universities',
-                'category' => 'universities',
-            ],
-        ];
-
-        $secMenuItems = [
-            ['url' => '/course/oscp-certifications-training', 'label' => 'OSCP'],
-            ['url' => '/course/ceh-v13-ai-certification-training', 'label' => 'CEH V13'],
-            ['url' => '/course/winter-cybersecurity-internship', 'label' => 'Cyber Security Training & Internship Program'],
-            ['url' => '/course/certified-web3-0-security-professional', 'label' => 'Certified Web 3.0 Security Professional'],
-        ];
-
-        $universities = \App\Models\University::where('status', 'active')
-            ->with('programs')
-            ->get();
-
-        $coursesByCategory = \App\Models\CourseCategory::where('status', 'active')
-            ->with('courses')
-            ->get()
-            ->pluck('courses', 'slug');
-
-        View::share('megaMenu', $megaMenu);
-        View::share('secMenuItems', $secMenuItems);
-        View::share('universities', $universities);
-        View::share('coursesByCategory', $coursesByCategory);
+        View::composer('site.site-header', SiteHeaderComposer::class);
     }
 }

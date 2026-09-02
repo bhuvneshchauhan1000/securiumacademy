@@ -1,9 +1,9 @@
 @php
   $blogs = \App\Models\Blog::with(['blogCategory', 'user'])->where('status', 'published')->orderBy('created_at', 'desc')->take(10)->get();
   $popularCourses = \App\Models\Course::with(['courseCategory', 'academy', 'university'])
-      ->where('status', 'published')
-      ->orderByRaw('is_featured DESC, created_at DESC')
-      ->get();
+    ->where('status', 'published')
+    ->orderByRaw('is_featured DESC, created_at DESC')
+    ->get();
  @endphp
 
 <section class="venom-hero">
@@ -548,7 +548,9 @@
               @if ($course->featured_image)
                 <img src="{{ Storage::url($course->featured_image) }}" alt="{{ $course->name }}" loading="lazy">
               @else
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='100%25' height='100%25' fill='%230f141a'/%3E%3Ctext x='50%25' y='50%25' fill='%2357c5c7' font-size='16' text-anchor='middle' dominant-baseline='middle'%3E{{ $course->name }}%3C/text%3E%3C/svg%3E" alt="{{ $course->name }}" loading="lazy">
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='100%25' height='100%25' fill='%230f141a'/%3E%3Ctext x='50%25' y='50%25' fill='%2357c5c7' font-size='16' text-anchor='middle' dominant-baseline='middle'%3E{{ $course->name }}%3C/text%3E%3C/svg%3E"
+                  alt="{{ $course->name }}" loading="lazy">
               @endif
             </div>
             <h3>{{ $course->name }}</h3>
@@ -1090,7 +1092,6 @@
 </style>
 
 
-
 <!-- Partnering Section -->
 <section class="partner-list py-5" style="background:#000;">
   <div class="container">
@@ -1113,6 +1114,473 @@
     </div>
   </div>
 </section>
+
+
+
+<!-- we offer professional -->
+
+<div class="our-feature" style="background: radial-gradient(circle at top right, #0c141f, #000);">
+  <div class="container">
+    <div class="row align-items-center gy-4">
+
+      <!-- Left Side: Feature Content -->
+      <div class="col-lg-6 col-md-12">
+        <div class="our-feature-content text-white">
+          <!-- Section Title -->
+          <div class="section-title">
+            <h3 class="wow fadeInUp" style="color: #fff;">Cyber Security</h3>
+            <h2 class="wow fadeInUp" data-wow-delay="0.2s" data-cursor="-opaque" style="color: #fff;">
+              We Offer <span>Professional Security Certification</span>
+            </h2>
+          </div>
+
+          <!-- Feature List -->
+          <div class="ferature-list">
+            <!-- EC-Council -->
+            <div class="ferature-list-item wow fadeInUp d-flex align-items-start gap-3 mb-4" data-wow-delay="0.4s">
+              <div class="icon-box">
+                <img src="{{ asset('icons/icon-ferature-1.svg') }}" alt="" width="40">
+              </div>
+              <div class="ferature-list-content">
+                <h4 class="mb-1">EC-Council</h4>
+                <p class="mb-0">We are leading EC-Council training provider...</p>
+              </div>
+            </div>
+
+            <!-- CompTIA -->
+            <div class="ferature-list-item wow fadeInUp d-flex align-items-start gap-3 mb-4" data-wow-delay="0.6s">
+              <div class="icon-box">
+                <img src="{{ asset('icons/icon-ferature-2.svg') }}" alt="" width="40">
+              </div>
+              <div class="ferature-list-content">
+                <h4 class="mb-1">CompTIA</h4>
+                <p class="mb-0">Securium Academy offers cyber security course...</p>
+              </div>
+            </div>
+
+            <!-- Offensive -->
+            <div class="ferature-list-item wow fadeInUp d-flex align-items-start gap-3 mb-4" data-wow-delay="0.8s">
+              <div class="icon-box">
+                <img src="{{ asset('icons/icon-ferature-3.svg') }}" alt="" width="40">
+              </div>
+              <div class="ferature-list-content">
+                <h4 class="mb-1">Offensive</h4>
+                <p class="mb-0">Securium Academy offers comprehensive cyber security certification...</p>
+              </div>
+            </div>
+
+            <!-- ISACA -->
+            <div class="ferature-list-item wow fadeInUp d-flex align-items-start gap-3 mb-4" data-wow-delay="1s">
+              <div class="icon-box">
+                <img src="{{ asset('icons/icon-ferature-3.svg') }}" alt="" width="40">
+              </div>
+              <div class="ferature-list-content">
+                <h4 class="mb-1">ISACA</h4>
+                <p class="mb-0">Become a cybersecurity expert with Securium Academy...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side: 3D Carousel -->
+      <div class="col-lg-6 col-md-12 d-flex justify-content-center">
+        <div class="cyber-carousel-wrapper">
+          <div class="cyber-carousel" id="cyber-carousel">
+            <img src="{{asset('images/compita-copy.webp')}}" alt="Cybersecurity 1">
+            <img src="{{asset('images/offsec.webp')}}" alt="Cybersecurity 2">
+            <img src="{{asset('images/eccouncilbox.webp')}}" alt="Cybersecurity 3">
+            <img src="{{asset('images/issca.webp')}}" alt="Cybersecurity 4">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Carousel Container */
+  .cyber-carousel-wrapper {
+    width: 100%;
+    max-width: 320px;
+    height: 320px;
+    perspective: 1000px;
+    margin: auto;
+  }
+
+  .cyber-carousel {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: cyber-rotate 20s linear infinite;
+  }
+
+  .cyber-carousel img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  }
+
+  .cyber-carousel img:nth-child(1) {
+    transform: rotateY(0deg) translateZ(400px);
+  }
+
+  .cyber-carousel img:nth-child(2) {
+    transform: rotateY(90deg) translateZ(400px);
+  }
+
+  .cyber-carousel img:nth-child(3) {
+    transform: rotateY(180deg) translateZ(400px);
+  }
+
+  .cyber-carousel img:nth-child(4) {
+    transform: rotateY(270deg) translateZ(400px);
+  }
+
+  @keyframes cyber-rotate {
+    from {
+      transform: rotateY(0deg);
+    }
+
+    to {
+      transform: rotateY(360deg);
+    }
+  }
+
+  /* Responsive Carousel Size */
+  @media (max-width: 992px) {
+    .cyber-carousel-wrapper {
+      max-width: 260px;
+      height: 260px;
+    }
+
+    .cyber-carousel img {
+      border-radius: 16px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .cyber-carousel-wrapper {
+      max-width: 200px;
+      height: 200px;
+    }
+  }
+</style>
+
+
+<!-- 🌟 CERTIFICATION HIGHLIGHTS SECTION -->
+<section class="certification-showcase">
+  <div class="container">
+    <div class="cert-left">
+      <h2>Globally Recognized <span>Certifications</span></h2>
+      <p>
+        Every learner at <strong>Securium Academy</strong> gains skills verified by
+        industry-recognized credentials — proving expertise in ethical hacking,
+        penetration testing, and SOC operations.
+      </p>
+      <a href="#" class="btn-learn" data-bs-toggle="modal" data-bs-target="#exampleModal">Explore Programs</a>
+    </div>
+
+    <div class="cert-right">
+      <div class="cert-card"><img
+          src="https://cdn.sanity.io/images/t7y0tkf4/production/8afe8390f5a81ecde1e5e011af3315c1a60ac9b8-527x412.svg"
+          alt="OSCP Certificate"></div>
+      <div class="cert-card"><img
+          src="https://www.webasha.com/uploads/bootcamp/images/62fb92af8b97e1660654255.ceh-training--certification-exam-2.jpg"
+          alt="CEH v13 Certificate"></div>
+      <div class="cert-card"><img
+          src="https://media.licdn.com/dms/image/v2/D5622AQHtQcFprexT4w/feedshare-shrink_800/B56ZjH0KHzG4Ag-/0/1755698997327?e=2147483647&v=beta&t=yBFPC-KC4QwmVyPPcnTz2mJm5RTg1uiCS7XrB14pp0w"
+          alt="SOC Analyst"></div>
+      <div class="cert-card"><img src="https://miro.medium.com/v2/resize:fit:1400/1*gtZPUQ4OdxGaPn2M62AJaw.jpeg"
+          alt="Cyber Expert"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* 🔥 Section Base */
+  .certification-showcase {
+    background: linear-gradient(135deg, #000000 0%, #0c1428 100%);
+    padding: 100px 7%;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* 🧱 Container Layout */
+  .certification-showcase .container {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    align-items: center;
+    gap: 50px;
+  }
+
+  /* 🧭 Left Text Area */
+  .cert-left h2 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  .cert-left h2 span {
+    color: #57c5c7;
+    text-shadow: 0 0 10px rgba(87, 197, 199, 0.5);
+  }
+
+  .cert-left p {
+    font-size: 1.1rem;
+    color: #a9b5bb;
+    line-height: 1.6;
+    margin-bottom: 40px;
+  }
+
+  .btn-learn {
+    background: #57c5c7;
+    color: #000;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .btn-learn:hover {
+    background: #40a8aa;
+    transform: scale(1.05);
+  }
+
+
+
+  /* 🖼️ Right Certificates Grid */
+  .cert-right {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    position: relative;
+  }
+
+  /* 🎴 Certificate Cards */
+  .cert-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(87, 197, 199, 0.2);
+    border-radius: 18px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 20px rgba(87, 197, 199, 0.15);
+    transition: all 0.5s ease;
+  }
+
+  .cert-card img {
+    width: 100%;
+    height: 190px;
+    object-fit: contain;
+    filter: brightness(0.9);
+    transition: all 0.5s ease;
+  }
+
+  .cert-card::before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(87, 197, 199, 0.25), transparent 60%);
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .cert-card:hover::before {
+    opacity: 1;
+  }
+
+  .cert-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 0 35px rgba(87, 197, 199, 0.35);
+    border-color: #57c5c7;
+  }
+
+  .cert-card:hover img {
+    filter: brightness(1);
+  }
+
+  /* 📱 Responsive */
+  @media (max-width: 992px) {
+    .certification-showcase .container {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .cert-right {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cert-left h2 {
+      font-size: 2.2rem;
+    }
+  }
+</style>
+
+
+<!-- ⚡ Modern Dark Promo Section -->
+<section class="promo-dark-banner ">
+  <div class="container">
+    <div class="promo-dark-box d-flex flex-column flex-lg-row align-items-center justify-content-between">
+
+      <!-- 🌐 Left Content -->
+      <div class="promo-dark-content text-center text-lg-start">
+        <h3 class="promo-dark-title">Learn Cyber Security For Free!</h3>
+        <p class="promo-dark-desc">
+          Build your career in cybersecurity with hands-on labs, live sessions, and mentorship from industry experts.
+        </p>
+        <a href="#" class="promo-dark-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Explore Free
+          Courses</a>
+      </div>
+
+      <!-- 🖥️ Right Image -->
+      <div class="promo-dark-img">
+        <img src="{{ asset('images/promo-section.webp') }}" alt="Cyber Security Students">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* 🌑 Section Wrapper */
+  .promo-dark-banner {
+    background: radial-gradient(circle at top right, #0c141f, #000);
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ✨ Floating light effects */
+  .promo-dark-banner::before,
+  .promo-dark-banner::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.3;
+  }
+
+  .promo-dark-banner::before {
+    width: 300px;
+    height: 300px;
+    top: -80px;
+    left: -100px;
+    background: #57c5c7;
+  }
+
+  .promo-dark-banner::after {
+    width: 250px;
+    height: 250px;
+    bottom: -80px;
+    right: -100px;
+    background: #2b9fa1;
+  }
+
+  /* 💠 Box Container */
+  .promo-dark-box {
+    position: relative;
+    background: rgba(10, 20, 30, 0.75);
+    border: 1px solid rgba(87, 197, 199, 0.3);
+    border-radius: 22px;
+    padding: 60px;
+    box-shadow: 0 0 50px rgba(87, 197, 199, 0.1);
+    backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+  }
+
+  .promo-dark-box:hover {
+    box-shadow: 0 0 60px rgba(87, 197, 199, 0.25);
+    transform: translateY(-5px);
+  }
+
+  /* 🔠 Text Content */
+  .promo-dark-title {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: #57c5c7;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 20px rgba(87, 197, 199, 0.4);
+  }
+
+  .promo-dark-desc {
+    color: #cdd8df;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 30px;
+    max-width: 500px;
+  }
+
+  /* ⚡ Button */
+  .promo-dark-btn {
+    background: linear-gradient(90deg, #57c5c7, #3bb0b2);
+    color: #000;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 12px 38px;
+    border-radius: 50px;
+    border: none;
+    box-shadow: 0 0 25px rgba(87, 197, 199, 0.4);
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+  }
+
+  .promo-dark-btn:hover {
+    background: #fff;
+    color: #000;
+    transform: translateY(-3px);
+    box-shadow: 0 0 35px rgba(87, 197, 199, 0.6);
+  }
+
+  /* 🖼️ Image Styling */
+  .promo-dark-img img {
+    width: 400px;
+    height: auto;
+    border-radius: 16px;
+    filter: drop-shadow(0 0 25px rgba(87, 197, 199, 0.3));
+    transition: all 0.4s ease;
+  }
+
+  .promo-dark-box:hover .promo-dark-img img {
+    transform: scale(1.05);
+  }
+
+  /* 📱 Responsive */
+  @media (max-width: 992px) {
+    .promo-dark-box {
+      flex-direction: column;
+      text-align: center;
+      padding: 40px 25px;
+    }
+
+    .promo-dark-img img {
+      margin-top: 30px;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .promo-dark-title {
+      font-size: 2rem;
+    }
+  }
+</style>
+
+
 
 
 
@@ -1242,6 +1710,7 @@
     from {
       transform: translateX(0);
     }
+
     to {
       transform: translateX(-50%);
     }
@@ -1275,7 +1744,7 @@
                   @endif
                 </div>
                 <div class="card-body">
-                  <h5 class="card-title">{{ Str::limit($blog->title,50) }}</h5>
+                  <h5 class="card-title">{{ Str::limit($blog->title, 50) }}</h5>
                   <p class="card-text">{{ Str::limit($blog->short_description, 75) }}</p>
                   <a href="{{ url('blog/' . $blog->slug) }}" class="btn btn-glow">Read More</a>
                 </div>
@@ -1382,3 +1851,158 @@
     }
   }
 </style>
+
+{{-- Enroll Now Modal --}}
+<div class="modal fade" id="exampleModal" tabindex="-1">
+
+  <div class="modal-dialog modal-dialog-centered">
+
+    <div class="modal-content">
+
+      <div class="modal-header border-0">
+
+        <h5 class="modal-title">
+          Enquiry Form
+        </h5>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal">
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <form action="mail.php" method="post" id="enquiryForm" class="lead-form-ready" data-no-recaptcha="1">
+          <input type="hidden" name="lead_form_context" value="sticky_footer">
+
+          <!-- NAME -->
+          <div class="mb-3">
+
+            <label class="form-label">
+              Full Name
+            </label>
+
+            <input type="text" class="form-control" name="name" required>
+
+          </div>
+
+
+          <!-- EMAIL -->
+          <div class="mb-3">
+
+            <label class="form-label">
+              Email
+            </label>
+
+            <input type="email" class="form-control" name="email" required>
+
+          </div>
+
+
+          <!-- CITY -->
+          <div class="mb-3">
+
+            <label class="form-label">
+              City
+            </label>
+
+            <input type="text" class="form-control" name="city" required>
+
+          </div>
+
+          <!-- PHONE -->
+          <div class="mb-3">
+
+            <label class="form-label">
+              Phone Number
+            </label>
+
+            <input type="tel" id="modal_phone_input" name="phone" class="form-control" required>
+
+
+            <input type="hidden" name="country_code" id="modal_country_code">
+
+
+            <input type="hidden" name="country_name" id="modal_country_name">
+
+          </div>
+
+
+
+          <!-- COURSE -->
+          <div class="mb-3">
+
+            <label class="form-label">
+              Course
+            </label>
+
+            <select class="form-control" name="query" required>
+
+              <option value="">-- Select Course --</option>
+
+              <option value="CEH">CEH</option>
+              <option value="CPENT">CPENT</option>
+              <option value="CSA">CSA</option>
+              <option value="CTIA">CTIA</option>
+              <option value="CHFI">CHFI</option>
+              <option value="CCISO">CCISO</option>
+              <option value="COASP">COASP</option>
+              <option value="OSCP">OSCP</option>
+              <option value="OSEP">OSEP</option>
+              <option value="OSAI">OSAI</option>
+              <option value="OSWE">OSWE</option>
+              <option value="CISA">CISA</option>
+              <option value="CISM">CISM</option>
+              <option value="AAIA">AAIA</option>
+              <option value="AAISM">AAISM</option>
+              <option value="CRISC">CRISC</option>
+              <option value="CISSP">CISSP</option>
+              <option value="Security+">Security+</option>
+              <option value="PenTest+">PenTest+</option>
+              <option value="CySA+">CySA+</option>
+              <option value="Other">Other</option>
+
+            </select>
+
+          </div>
+
+          <!-- OCCUPATION -->
+          <div class="mb-3">
+
+            <label class="form-label">
+              Current Occupation
+            </label>
+
+            <select class="form-control" name="occupation" required>
+              <option value="">Select Occupation</option>
+              <option value="Student">Student</option>
+              <option value="Fresher">Fresher</option>
+              <option value="Working Professional">Working Professional</option>
+            </select>
+
+          </div>
+          <div class="contact-captcha-box mb-3">
+            <label class="form-label" for="enquiry-captcha-answer">Security check</label>
+            <div class="captcha-question" id="enquiry-captcha-question">Solve: 3 + 4 = ?</div>
+            <input type="number" class="form-control" name="captcha_answer" id="enquiry-captcha-answer"
+              placeholder="Enter answer" required>
+            <input type="hidden" name="captcha_result" id="enquiry-captcha-result" value="">
+            <small class="text-muted">Enter the result of the math question above.</small>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100">
+
+            Submit
+
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -446,3 +446,22 @@
 .email-form [name="occupation"] {
   display: none !important;
 }
+
+/* Enroll modal phone field — country flag + dial code */
+#enrollForm .iti {
+  width: 100%;
+}
+
+#enrollForm .iti__tel-input,
+#enrollForm input[type="tel"] {
+  width: 100% !important;
+  height: var(--lf-height) !important;
+  padding-left: 96px !important;
+  border-color: var(--lf-input-border) !important;
+  border-radius: var(--lf-radius) !important;
+  font-size: 14px !important;
+}
+
+#enrollForm .iti__country-container {
+  border-radius: var(--lf-radius) 0 0 var(--lf-radius);
+}

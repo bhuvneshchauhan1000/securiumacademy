@@ -157,6 +157,42 @@
 
     @stack('scripts')
 
+    {{-- intl-tel-input: country flags & dial codes for phone inputs --}}
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.0/build/js/intlTelInput.min.js"></script>
+
+    <script>
+        (function () {
+            if (typeof window.intlTelInput !== 'function') {
+                return;
+            }
+
+            function initPhoneFields() {
+                document.querySelectorAll('input[name="phone"]').forEach(function (input) {
+                    if (input.dataset.itiReady === '1') {
+                        return;
+                    }
+                    if (input.closest('.phone-group') || input.closest('.lm-phone')) {
+                        return;
+                    }
+
+                    input.dataset.itiReady = '1';
+                    window.intlTelInput(input, {
+                        initialCountry: 'in',
+                        separateDialCode: true,
+                        preferredCountries: ['in', 'us', 'gb', 'ae'],
+                        utilsScript: 'https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.0/build/js/utils.js'
+                    });
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initPhoneFields);
+            } else {
+                initPhoneFields();
+            }
+        })();
+    </script>
+
 </body>
 
 </html>

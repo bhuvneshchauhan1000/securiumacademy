@@ -197,8 +197,44 @@ html {
 }
 
 
+.search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 40px;
+    transition: 0.4s ease;
+}
 
+.search-box:hover,
+.search-box.active {
+    width: 220px;
+}
 
+.search-input {
+    width: 0;
+    opacity: 0;
+    padding: 8px 0px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 14px;
+    transition: 0.4s ease;
+}
+
+.search-box:hover .search-input,
+.search-box.active .search-input {
+    width: 100%;
+    opacity: 1;
+}
+
+.search-icon {
+    width: 18px;
+    height: 28px;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    fill: white;
+}
 
 
 /* Navigation Menu */
@@ -309,63 +345,102 @@ button.btn.btn-success.w-100 {
     background: #36999b !important;
 }
 
-/* panter sytel */
-/* Section container */
+/* =========================================
+         PARTNER SECTION
+         ========================================= */
+
 .partner-list {
-    background-color: #fff;
-    padding: 50px 0;
-}
-
-/* Marquee container */
-.marquee {
+    background: #000;
+    padding-top: 50px;
+    padding-bottom: 50px;
     overflow: hidden;
-    white-space: nowrap;
-    position: relative;
-    width: 100%;
 }
 
-/* Marquee content */
+
+/* =========================================
+         HEADING
+         ========================================= */
+
+.partner-list h2 {
+    color: #fff;
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 35px;
+}
+
+
+/* =========================================
+         MARQUEE
+         ========================================= */
+
+.marquee {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+
+/* =========================================
+         MARQUEE CONTENT
+         ========================================= */
+
 .marquee__content {
     display: flex;
-    gap: 40px;
-    /* Adjust spacing between logos */
-    animation: marqueeScroll 10s linear infinite;
-}
-
-/* Individual logo items */
-.marquee {
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    white-space: nowrap;
-}
-
-/* Marquee content (larger width for looping effect) */
-.marquee__content {
-    display: flex;
-    gap: 40px;
-    /* Adjust spacing between logos */
+    align-items: center;
     width: max-content;
-    animation: marqueeScroll 10s linear infinite;
+
+    /* SLOW MARQUEE */
+    animation: partner-marquee 100s linear infinite;
 }
 
-/* Individual logo items */
+
+/* =========================================
+         PARTNER ITEM
+         ========================================= */
+
 .marquee__item {
     flex: 0 0 auto;
+
+    width: 190px;
+    height: 110px;
+
+    margin-left: 20px;
+    margin-right: 20px;
+
+    padding: 15px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    background: #fff;
+    border-radius: 8px;
 }
 
-/* Logo size */
+
+/* =========================================
+         PARTNER IMAGE
+         ========================================= */
+
 .marquee__item img {
-    max-height: 80px;
-    /* Adjust logo size */
+    display: block;
+
+    max-width: 150px;
+    max-height: 75px;
+
     width: auto;
+    height: auto;
+
+    object-fit: contain;
 }
 
-/* Keyframes for smooth infinite scrolling */
-@keyframes marqueeScroll {
+
+/* =========================================
+         MARQUEE ANIMATION
+         ========================================= */
+
+@keyframes partner-marquee {
+
     from {
         transform: translateX(0);
     }
@@ -374,17 +449,121 @@ button.btn.btn-success.w-100 {
         transform: translateX(-50%);
     }
 
-    /* Move by 50% (since we duplicated the logos) */
 }
 
-/* Responsiveness */
-@media (max-width: 768px) {
+
+/* =========================================
+         PAUSE WHEN MOUSE HOVERS
+         ========================================= */
+
+.marquee:hover .marquee__content {
+    animation-play-state: paused;
+}
+
+
+/* =========================================
+         TABLET
+         ========================================= */
+
+@media (max-width: 991px) {
+
+    .partner-list {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    .partner-list h2 {
+        font-size: 27px;
+        margin-bottom: 30px;
+    }
+
+    .marquee__content {
+        animation-duration: 100s;
+    }
+
+    .marquee__item {
+        width: 170px;
+        height: 100px;
+
+        margin-left: 15px;
+        margin-right: 15px;
+
+        padding: 12px;
+    }
+
     .marquee__item img {
-        width: 80px;
-        /* Smaller image on mobile */
+        max-width: 135px;
+        max-height: 65px;
     }
 }
 
+
+/* =========================================
+         MOBILE
+         ========================================= */
+
+@media (max-width: 767px) {
+
+    .partner-list {
+        padding-top: 35px;
+        padding-bottom: 35px;
+    }
+
+    .partner-list h2 {
+        font-size: 22px;
+        line-height: 1.4;
+
+        padding-left: 15px;
+        padding-right: 15px;
+
+        margin-bottom: 25px;
+    }
+
+    .marquee__content {
+        animation-duration: 100s;
+    }
+
+    .marquee__item {
+        width: 145px;
+        height: 85px;
+
+        margin-left: 10px;
+        margin-right: 10px;
+
+        padding: 10px;
+    }
+
+    .marquee__item img {
+        max-width: 115px;
+        max-height: 55px;
+    }
+}
+
+
+/* =========================================
+         SMALL MOBILE
+         ========================================= */
+
+@media (max-width: 480px) {
+
+    .partner-list h2 {
+        font-size: 20px;
+    }
+
+    .marquee__item {
+        width: 130px;
+        height: 75px;
+
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+
+    .marquee__item img {
+        max-width: 105px;
+        max-height: 50px;
+    }
+
+}
 
 a.btn.btn-primary.btn-lg.mt-3 {
     background: #36999b;
@@ -3146,3 +3325,174 @@ p.narrow {
     /* Highlight on hover */
 }
 
+
+/* ============ Responsive Navbar ============ */
+.site-logo {
+    max-width: 200px;
+    height: auto;
+}
+
+@media (max-width: 1199.98px) {
+    .navbar .container {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .bg-dark {
+        padding: 12px;
+    }
+
+    /* Force logo + All Courses + toggler onto a single row */
+    .navbar>.container {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .navbar-brand {
+        margin-right: 0;
+        min-width: 0;
+        justify-self: start;
+    }
+
+    .site-logo {
+        max-width: 150px;
+    }
+
+    .custom-btn {
+        padding: 8px 14px;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    .custom-btn img {
+        width: 16px;
+        margin-right: 6px;
+    }
+
+    /* Mega menu full width on tablet & mobile */
+    .mega-menu {
+        left: 0 !important;
+        width: 100% !important;
+        top: 100%;
+        max-height: 70vh;
+        overflow-y: auto;
+    }
+
+    .side-menu {
+        flex-shrink: 0;
+    }
+
+    /* Collapsed mobile menu - spans the full grid width below the first row */
+    .navbar-collapse {
+        grid-column: 1 / -1;
+        width: 100%;
+        background: #212529;
+        padding: 16px;
+        border-radius: 8px;
+        margin-top: 10px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .navbar-collapse .navbar-nav {
+        width: 100%;
+        gap: 2px;
+        text-align: left;
+    }
+
+    .navbar-collapse .nav-item {
+        width: 100%;
+    }
+
+    .navbar-collapse .nav-item.dropdown {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .navbar-collapse .nav-link {
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        white-space: normal;
+    }
+
+    .navbar-collapse .nav-link.dropdown-toggle::after {
+        margin-left: auto;
+    }
+
+    .navbar-collapse .dropdown-menu {
+        position: static !important;
+        float: none;
+        inset: auto !important;
+        transform: none !important;
+        background: #2a2f34;
+        border: none;
+        border-radius: 8px;
+        padding: 8px;
+        margin: 4px 0 8px;
+        box-shadow: none;
+    }
+
+    .navbar-collapse .dropdown-item {
+        color: #fff;
+        padding: 8px 12px;
+        border-radius: 6px;
+    }
+
+    .navbar-collapse .dropdown-item:hover,
+    .navbar-collapse .dropdown-item:active {
+        background: rgba(255, 255, 255, 0.1);
+        color: #5cc7cc;
+    }
+
+    .navbar-collapse .btn {
+        width: 100%;
+        justify-content: center;
+        margin: 4px 0;
+    }
+
+    .navbar-collapse .flag-dropdown .dropdown-menu {
+        position: static !important;
+    }
+
+    /* Mobile search inside collapsed menu */
+    .navbar-collapse .mobile-search {
+        width: 100%;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 10px;
+        align-items: center;
+    }
+
+    .navbar-collapse .mobile-search .search-input {
+        width: 100%;
+        opacity: 1;
+        padding: 8px 40px 8px 14px;
+        background: #fff;
+    }
+
+    .navbar-collapse .mobile-search .search-icon {
+        right: 14px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .site-logo {
+        max-width: 120px;
+    }
+
+    .custom-btn {
+        font-size: 13px;
+        padding: 7px 12px;
+    }
+
+    .custom-btn img {
+        width: 14px;
+        margin-right: 4px;
+    }
+
+    .navbar>.container {
+        gap: 6px;
+    }
+}

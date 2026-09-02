@@ -1,73 +1,4 @@
 <header>
-
-    <style>
-        .ecu-course {
-            position: relative;
-            padding-top: 70px;
-        }
-
-        .ecu-course::before {
-            content: "";
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            width: 90px;
-            height: 35px;
-            background: url("assets/images/eccunew.png") no-repeat left center;
-            background-size: contain;
-        }
-
-        .ecu-course::after {
-            content: "Delivered by";
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            padding-right: 90px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            font-size: 11px;
-            color: #666;
-            background: url("assets/images/logo.png") no-repeat right center;
-            background-size: 80px;
-        }
-
-        /* ===== Birchwood University Course Card Logo ===== */
-        #brichwood .ecu-course {
-            position: relative;
-            padding-top: 65px;
-            /* space for logos */
-        }
-
-        /* LEFT – Birchwood University logo */
-        #brichwood .ecu-course::before {
-            content: "";
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            width: 85px;
-            height: 32px;
-            background: url("assets/images/birchwood-logo.webp") no-repeat left center;
-            background-size: contain;
-        }
-
-        /* RIGHT – Delivered by Securium logo */
-        #brichwood .ecu-course::after {
-            content: "Delivered by";
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            padding-right: 95px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            font-size: 11px;
-            color: #666;
-            background: url("assets/images/logo.png") no-repeat right center;
-            background-size: 85px;
-        }
-    </style>
-
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
 
@@ -240,209 +171,21 @@
                             @endforeach
                         </ul>
                     </li>
+
+                    <li class="nav-item d-lg-none mt-3">
+                        <div class="search-box mobile-search">
+                            <input type="text" class="search-input" placeholder="Search courses..."
+                                id="mobileSearchInput" autocomplete="off">
+                            <svg class="search-icon" viewBox="0 0 24 24">
+                                <path fill="white"
+                                    d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C8.01 14 6 11.99 6 9.5S8.01 5 10.5 5 15 7.01 15 9.5 12.99 14 10.5 14z" />
+                            </svg>
+                        </div>
+                    </li>
                 </ul>
             </div>
 
-            <style>
-                #cyber-security .ecu-course {
-                    position: relative;
-                    padding-top: 65px;
-                }
-
-                #cyber-security .ecu-course::before {
-                    content: "";
-                    position: absolute;
-                    top: 12px;
-                    left: 12px;
-                    width: 85px;
-                    height: 32px;
-                    background: url("assets/images/ec_council_logo.png") no-repeat left center;
-                    background-size: contain;
-                }
-
-                #cyber-security .ecu-course::after {
-                    content: "Delivered by";
-                    position: absolute;
-                    top: 12px;
-                    right: 12px;
-                    padding-right: 95px;
-                    height: 32px;
-                    display: flex;
-                    align-items: center;
-                    font-size: 11px;
-                    color: #666;
-                    background: url("assets/images/logo.png") no-repeat right center;
-                    background-size: 85px;
-                }
-
-                #data-science .isc-course {
-                    position: relative;
-                    padding-top: 65px;
-                }
-
-                #data-science .isc-course::before {
-                    content: "";
-                    position: absolute;
-                    top: 12px;
-                    left: 12px;
-                    width: 80px;
-                    height: 32px;
-                    background: url("assets/images/isc.png") no-repeat left center;
-                    background-size: contain;
-                }
-
-                #data-science .isc-course::after {
-                    content: "Delivered by";
-                    position: absolute;
-                    top: 12px;
-                    right: 12px;
-                    padding-right: 90px;
-                    height: 32px;
-                    display: flex;
-                    align-items: center;
-                    font-size: 11px;
-                    color: #666;
-                    background: url("assets/images/logo.png") no-repeat right center;
-                    background-size: 80px;
-                }
-
-                #offensive .offensive-course {
-                    position: relative;
-                    padding-top: 65px;
-                }
-
-                #offensive .offensive-course::before {
-                    content: "";
-                    position: absolute;
-                    top: 12px;
-                    left: 12px;
-                    width: 85px;
-                    height: 32px;
-                    background: url("assets/images/offsec_logo.jpg") no-repeat left center;
-                    background-size: contain;
-                }
-
-                #offensive .offensive-course::after {
-                    content: "Delivered by";
-                    position: absolute;
-                    top: 12px;
-                    right: 12px;
-                    padding-right: 95px;
-                    height: 32px;
-                    display: flex;
-                    align-items: center;
-                    font-size: 11px;
-                    color: #666;
-                    background: url("assets/images/logo.png") no-repeat right center;
-                    background-size: 85px;
-                }
-
-                #comptia .comptia-course {
-                    position: relative;
-                    padding-top: 65px;
-                }
-
-                #comptia .comptia-course::before {
-                    content: "";
-                    position: absolute;
-                    top: 12px;
-                    left: 12px;
-                    width: 85px;
-                    height: 32px;
-                    background: url("assets/images/comptia.png") no-repeat left center;
-                    background-size: contain;
-                }
-
-                #comptia .comptia-course::after {
-                    content: "Delivered by";
-                    position: absolute;
-                    top: 12px;
-                    right: 12px;
-                    padding-right: 95px;
-                    height: 32px;
-                    display: flex;
-                    align-items: center;
-                    font-size: 11px;
-                    color: #666;
-                    background: url("assets/images/logo.png") no-repeat right center;
-                    background-size: 85px;
-                }
-            </style>
-            <!-- Search Box -->
-            <style>
-                .search-box {
-                    position: relative;
-                    display: flex;
-                    align-items: center;
-                    width: 40px;
-                    transition: 0.4s ease;
-                }
-
-                .search-box:hover,
-                .search-box.active {
-                    width: 220px;
-                }
-
-                .search-input {
-                    width: 0;
-                    opacity: 0;
-                    padding: 8px 10px;
-                    border-radius: 20px;
-                    border: 1px solid #ccc;
-                    outline: none;
-                    font-size: 14px;
-                    transition: 0.4s ease;
-                }
-
-                .search-box:hover .search-input,
-                .search-box.active .search-input {
-                    width: 100%;
-                    opacity: 1;
-                }
-
-                .search-icon {
-                    width: 18px;
-                    height: 28px;
-                    cursor: pointer;
-                    position: absolute;
-                    right: 10px;
-                    fill: white;
-                }
-
-
-                #isaca .isaca-course {
-                    position: relative;
-                    padding-top: 65px;
-                }
-
-                #isaca .isaca-course::before {
-                    content: "";
-                    position: absolute;
-                    top: 12px;
-                    left: 12px;
-                    width: 85px;
-                    height: 32px;
-                    background: url("assets/images/issaca.jpg") no-repeat left center;
-                    background-size: contain;
-                }
-
-                #isaca .isaca-course::after {
-                    content: "Delivered by";
-                    position: absolute;
-                    top: 12px;
-                    right: 12px;
-                    padding-right: 95px;
-                    height: 32px;
-                    display: flex;
-                    align-items: center;
-                    font-size: 11px;
-                    color: #666;
-                    background: url("assets/images/logo.png") no-repeat right center;
-                    background-size: 85px;
-                }
-            </style>
-
-            <div class="search-box" id="searchBox">
+            <div class="search-box d-none d-lg-flex" id="searchBox">
                 <input type="text" class="search-input" placeholder="Search courses..." id="searchInput"
                     autocomplete="off">
                 <svg class="search-icon" viewBox="0 0 24 24">
@@ -452,18 +195,23 @@
             </div>
 
             <script>
-                const searchBox = document.getElementById("searchBox");
-                const searchInput = document.getElementById("searchInput");
-                searchInput.addEventListener("keydown", function (e) {
-                    if (e.key === "Enter") {
-                        const q = searchInput.value.trim();
-                        if (q) window.location.href = "{{ url('search') }}?q=" + encodeURIComponent(q);
-                    }
-                });
-                searchInput.addEventListener("focus", () => searchBox.classList.add("active"));
-                searchInput.addEventListener("blur", () => {
-                    if (searchInput.value.trim() === "") searchBox.classList.remove("active");
-                });
+                function initSearch(inputId, boxId) {
+                    const box = boxId ? document.getElementById(boxId) : null;
+                    const input = document.getElementById(inputId);
+                    if (!input) return;
+                    input.addEventListener("keydown", function (e) {
+                        if (e.key === "Enter") {
+                            const q = input.value.trim();
+                            if (q) window.location.href = "{{ url('search') }}?q=" + encodeURIComponent(q);
+                        }
+                    });
+                    input.addEventListener("focus", () => box && box.classList.add("active"));
+                    input.addEventListener("blur", () => {
+                        if (input.value.trim() === "" && box) box.classList.remove("active");
+                    });
+                }
+                initSearch("searchInput", "searchBox");
+                initSearch("mobileSearchInput", null);
             </script>
 
         </div>

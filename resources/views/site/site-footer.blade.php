@@ -32,8 +32,8 @@
                 <li><a href="{{ url('blog') }}">Blog</a></li>
                 <li><a href="{{ url('career') }}">Career</a></li>
                 <li><a href="{{ url('vapt-intern') }}">vapt internship</a></li>
-                <li><a href="{{ url('terms-conditions') }}">Terms & Conditions</a></li>
-                <li><a href="{{ url('privacy-policy') }}">Privacy Policy</a></li>
+                <li><a href="{{ route('term-and-condition') }}">Terms & Conditions</a></li>
+                <li><a href="{{ route('privacy-policy') }}">Privacy Policy</a></li>
             </ul>
         </div>
         <div class="footer-column">

@@ -146,9 +146,9 @@
 
     @include('site.site-footer')
 
-    {{-- @include('partials.enquiry-modal')
+    {{-- @include('partials.enquiry-modal') --}}
 
-    @include('partials.sticky-form') --}}
+    @include('site.sticky-form')
 
     {{-- Bootstrap --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -48,6 +48,14 @@ Route::get('blog/{slug}',function($slug){
     return view('blog-detail',compact('slug'));
 })->name('blog.detail');
 
+Route::get('term-and-condition',function(){
+    return view('term-and-condition');
+})->name('term-and-condition');
+
+Route::get('privacy-policy',function(){
+    return view('privacy-policy');
+})->name('privacy-policy');
+
 // Route::get('/', function () {
 //     return view('welcome');
 // })->name('home');

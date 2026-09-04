@@ -43,7 +43,7 @@ class SiteHeaderComposer
         $byCategory = [];
 
         $courses = Course::where('status', 'published')
-            ->with('courseCategory', 'university')
+            ->with('courseCategory', 'university', 'academy')
             ->get();
 
         foreach ($courses as $course) {

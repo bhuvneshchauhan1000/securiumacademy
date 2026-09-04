@@ -35,14 +35,10 @@
                                     @endphp
                                     @if ($currentUniversity)
                                         <p>
-                                            @if ($currentUniversity->logo)
-                                                <img src="{{ asset($currentUniversity->logo) }}" alt="{{ $currentUniversity->name }} Logo"
-                                                    style="max-width:120px; margin-bottom:8px;">
-                                            @endif
                                             <strong><a href="{{ url('university/' . $currentUniversity->slug) }}"
-                                                    style="color:#fff; text-decoration:none;">{{ $currentUniversity->name }}</a></strong>
+                                                    text-decoration:none;">{{ $currentUniversity->name }}</a></strong>
                                         </p>
-                                        <div class="course-container">
+                                        <div class="course-container university-course-container">
                                             @php
                                                 $catCourses = isset($coursesByCategory[$item['university_slug']])
                                                     ? $coursesByCategory[$item['university_slug']]
@@ -50,7 +46,26 @@
                                             @endphp
                                             @forelse ($catCourses as $course)
                                                 <a href="{{ url($course->slug) }}" class="course-card">
-                                                    <p>{{ $course->name }}</p>
+                                                    @php
+                                                        $universityLogo = $currentUniversity->logo;
+                                                        $deliveredBy = $course->academy?->logo ? $course->academy : $currentUniversity;
+                                                    @endphp
+                                                    <div class="course-card-logos">
+                                                        @if ($universityLogo)
+                                                            <img src="{{ Storage::url($universityLogo) }}"
+                                                                alt="{{ $currentUniversity->name }} Logo" class="course-university-logo">
+                                                        @endif
+                                                        <span class="course-delivered-by">
+                                                            <span>Delivered by</span>
+                                                            @if ($deliveredBy->logo)
+                                                                <img src="{{ Storage::url($deliveredBy->logo) }}"
+                                                                    alt="{{ $deliveredBy->name }} Logo">
+                                                            @endif
+                                                        </span>
+                                                        </div>
+                                                        <div class="course-card-content">
+                                                            <p class="course-card-name">{{ $course->name }}</p>
+                                                        </div>
                                                 </a>
                                             @empty
                                                 <a href="#" class="course-card">

@@ -81,11 +81,12 @@ html {
 /* Layout Structure */
 .menu-container {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .side-menu {
-    width: 20%;
+    flex: 0 0 20%;
+    box-sizing: border-box;
     background: #f8f9fa;
     padding: 10px;
     border-right: 1px solid #ddd;
@@ -129,6 +130,7 @@ html {
 }
 
 .content-area {
+    min-width: 0;
     flex-grow: 1;
     padding: 10px;
     background: #80bebc4f;
@@ -158,6 +160,62 @@ html {
     transform: translateY(-5px);
 }
 
+.university-course-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.university-course-container .course-card {
+    position: relative;
+    min-height: 145px;
+    padding: 68px 12px 14px;
+}
+
+.course-card-logos {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    right: 12px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.course-card-content {
+    min-width: 0;
+}
+
+.course-university-logo,
+.course-delivered-by img {
+    display: block;
+    width: 48px;
+    height: 48px;
+    max-width: 48px;
+    max-height: 48px;
+    object-fit: contain;
+}
+
+.course-delivered-by {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+    width: auto;
+    flex: 0 0 auto;
+    color: #555;
+    font-size: 10px;
+    line-height: 1.2;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.course-card-name {
+    margin: 6px 0 0;
+    text-align: center;
+}
+
 /* Mobile Optimization */
 @media (max-width: 768px) {
     .menu-container {
@@ -165,6 +223,7 @@ html {
     }
 
     .side-menu {
+        flex: 0 0 auto;
         width: 100%;
         border-right: none;
         border-bottom: 1px solid #ddd;
@@ -177,6 +236,10 @@ html {
 
     .course-container {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .university-course-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 

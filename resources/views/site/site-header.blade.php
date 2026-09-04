@@ -35,8 +35,7 @@
                                     @endphp
                                     @if ($currentUniversity)
                                         <p>
-                                            <strong><a href="{{ url('university/' . $currentUniversity->slug) }}"
-                                                    text-decoration:none;">{{ $currentUniversity->name }}</a></strong>
+                                            <strong><a href="{{ route('university.detail',['slug' => $currentUniversity->slug]) }}"text-decoration:none;">{{ $currentUniversity->name }}</a></strong>
                                         </p>
                                         <div class="course-container university-course-container">
                                             @php
@@ -45,7 +44,7 @@
                                                     : collect();
                                             @endphp
                                             @forelse ($catCourses as $course)
-                                                <a href="{{ url($course->slug) }}" class="course-card">
+                                                <a href="{{ route('course.detail',['slug' => $course->slug]) }}" class="course-card">
                                                     @php
                                                         $universityLogo = $currentUniversity->logo;
                                                         $deliveredBy = $course->academy?->logo ? $course->academy : $currentUniversity;

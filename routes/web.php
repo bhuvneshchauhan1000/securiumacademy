@@ -40,6 +40,14 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
+Route::get('university/{slug}',function($slug){
+    dd($slug);
+})->name('university.detail');
+
+Route::get('course/{slug}',function($slug){
+    return view('course-detail',compact('slug'));
+})->name('course.detail');
+
 Route::get('blog',function(){
     return view('blog');
 })->name('blog');
